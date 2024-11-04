@@ -2,7 +2,7 @@ var now = new Date();
 
 function createtime() {
     now.setTime(now.getTime() + 1e3);
-    var e = new Date("14/01/2022 00:00:00");
+    var e = new Date("08/01/2022 00:00:00");
     var t = Math.trunc(234e8 + (now - e) / 1e3 * 17);
     var a = (t / 1496e5).toFixed(6);
     var o = new Date("08/09/2022 00:00:00");
@@ -19,10 +19,10 @@ function createtime() {
     b = (b < 10) ? "0" + b : b;
     let c = "";
     c = s < 18 && s >= 9 ?
-        `<img class='boardsign' src='https://sourcebucket.s3.ladydaily.com/badge/F小屋-科研摸鱼中.svg' title='什么时候能够实现财富自由呀~'><br>
+        `<img class='boardsign' src='/img_1/F小屋-科研摸鱼中.svg' title='什么时候能够实现财富自由呀~'><br>
         <div style="font-size:13px;font-weight:bold">本站居然运行了 ${r} 天 ${s} 小时 ${l} 分 ${b} 秒 <i id="heartbeat" class='fas fa-heartbeat'></i>
         <br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div>` :
-        `<img class='boardsign' src='https://sourcebucket.s3.ladydaily.com/badge/F小屋-下班休息啦.svg' title='下班了就该开开心心地玩耍~'><br>
+        `<img class='boardsign' src='/img_1/F小屋-科研摸鱼中.svg' title='下班了就该开开心心地玩耍~'><br>
         <div style="font-size:13px;font-weight:bold">本站居然运行了 ${r} 天 ${s} 小时 ${l} 分 ${b} 秒 <i id="heartbeat" class='fas fa-heartbeat'></i>
         <br> 旅行者 1 号当前距离地球 ${t} 千米，约为 ${a} 个天文单位 🚀</div>`;
     if (document.getElementById("workboard")) {
