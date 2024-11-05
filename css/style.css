@@ -1,5 +1,5 @@
 :root {
-  --trans-light: rgba(255, 255, 255, 0.6);
+  --trans-light: rgba(255, 255, 255, 0.7);
   --trans-dark: rgba(25, 25, 25, 0.7);
   --border-style: 1px solid rgb(169, 169, 169);
   --backdrop-filter: none;
@@ -197,4 +197,16 @@ div#archive {
   height: 100%;
   pointer-events: none;
   z-index: -1;
+}
+
+/* 小冰分类分类磁铁黑夜模式适配 */
+/* 一般状态 */
+[data-theme="dark"] .magnet_link_context {
+  background: #1e1e1e;
+  color: antiquewhite;
+}
+/* 鼠标悬浮状态 */
+[data-theme="dark"] .magnet_link_context:hover {
+  background: #3ecdf1;
+  color: #f2f2f2;
 }
