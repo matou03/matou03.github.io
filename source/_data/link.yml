@@ -1,0 +1,19 @@
+- class_name: Matou的博客
+  class_desc: 
+  link_list:
+    - name: Matou
+      link: https://akilar.top
+      avatar: /img/31FDDB53259E3FDC3336D71D73AF757B.jpg
+      descr: 欢迎来到我的博客屋
+      siteshot: /img/2E7ACD823C75B4E15C31DEC35C63511F.jpg
+      # siteshot就是站点缩略图的链接。
+
+- class_name: 糖果屋のVIP
+  class_desc: 售后服务享五折优惠2333
+  link_list:
+    - name: Akilar
+      link: https://akilar.top
+      avatar: https://avatars.tidiochat.com/8fb116bc0e8508ae9460eed6135693df.jpeg&quot
+      descr: 欢迎光临糖果屋
+      siteshot: https://cdn.jsdelivr.net/gh/Akilarlxh/ScreenShot@gh-pages/akilar.top.jpg
+      # siteshot就是站点缩略图的链接。
