@@ -268,7 +268,7 @@ div#archive {
 
 video {
   width: 100%; /* 视频宽度占满容器 */
-  max-width: 640px; /* 最大宽度为640px */
+  max-width: 640px; /* 最大宽度为800px */
   height: auto; /* 高度自动调整 */
 }
 
