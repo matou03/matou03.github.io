@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>面向对象与面向过程</title>
+      <link href="/2024/11/11/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B/"/>
+      <url>/2024/11/11/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E4%B8%8E%E9%9D%A2%E5%90%91%E8%BF%87%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>从现在开始我将正式开始分享一些C++程序的讲解，相信大家对于C语言并不陌生，我们接下来需要去学习的C++这个编程语言也跟C语言有关系，但是它与C语言有很大的区别，本节内容不会有代码的讲解，作为一个引文的作用，目的在于让大家认识到C++与C语言的区别，或者说面向对象程序设计语言与面向过程程序设计语言的区别，以便于之后更好的去理解代码、语法等等</strong></p><h1 id="面向对象与面向过程"><a href="#面向对象与面向过程" class="headerlink" title="面向对象与面向过程"></a>面向对象与面向过程</h1><h2 id="一-面向过程-OOP"><a href="#一-面向过程-OOP" class="headerlink" title="一.面向过程(OOP)"></a>一.面向过程(OOP)</h2><h3 id="什么是面向过程？"><a href="#什么是面向过程？" class="headerlink" title="什么是面向过程？"></a>什么是面向过程？</h3><p><strong>面向过程是一种以步骤为核心的编程方式，逻辑比较线性。可以理解为<u>以完成任务为目标</u>，通过一系列有序的指令来操作数据，逐步完成任务。我们来具体谈谈：</strong></p><h4 id="游戏中的面向过程"><a href="#游戏中的面向过程" class="headerlink" title="游戏中的面向过程"></a>游戏中的面向过程</h4><p><strong>设想我们要设计一个战斗游戏，有以下角色和功能：</strong></p><p><strong>角色：玩家、怪物</strong><br><strong>功能：攻击、逃跑、升级</strong></p><p><strong>在面向过程的思维中，我们可以按照以下步骤实现：</strong></p><p><strong>1.定义玩家的属性：生命值、攻击力、防御力</strong><br><strong>2.定义怪物的属性：生命值、攻击力、防御力</strong><br><strong>3.编写函数：</strong><br><strong>玩家攻击函数——playerAttackMonster()：玩家攻击怪物，怪物的生命值减少</strong><br><strong>怪物攻击函数——monsterAttackPlayer()：怪物攻击玩家，玩家的生命值减少</strong><br><strong>升级函数——upgradePlayer()：玩家升级时提升攻击力和防御力</strong><br><strong>4.游戏逻辑：通过调用这些函数来实现游戏流程，如玩家攻击、怪物攻击、玩家升级等</strong>。<br><strong>我们可以看到，<u>游戏的主要逻辑由一系列的函数组成，这些函数一个接一个地执行</u></strong></p><p><strong>所以可以得到面向过程的特点：</strong><br><strong>1.步骤清晰：逐步执行代码，如先定义角色，再实现攻击功能</strong><br><strong>2.数据分散：每个角色的数据和行为都是分开的，玩家和怪物的属性、函数不相关</strong><br><strong>3.适合小型项目：如果游戏简单，面向过程的逻辑非常直观</strong></p><p><strong>但这也带来了面向过程的劣势：</strong><br><strong>1.代码重复：不同的角色可能要定义相似的属性（如生命值、攻击力等）</strong><br><strong>2.维护困难：如果要新增一个角色，如“弓箭手”，需要增加很多函数和属性，工作量增加</strong></p><h2 id="二-面向对象-POP"><a href="#二-面向对象-POP" class="headerlink" title="二.面向对象(POP)"></a>二.面向对象(POP)</h2><h3 id="什么是面向对象？"><a href="#什么是面向对象？" class="headerlink" title="什么是面向对象？"></a>什么是面向对象？</h3><p><strong>面向对象是一种以数据和行为组合为核心的编程方式，结构较为模块化。它强调将数据和操作结合在一起，通过“类”和“对象”将复杂的任务组织为独立的模块，还是以游戏为例：</strong></p><h4 id="游戏中的面向对象"><a href="#游戏中的面向对象" class="headerlink" title="游戏中的面向对象"></a>游戏中的面向对象</h4><p><strong>在面向对象的思维中，我们可以通过创建类来封装角色和行为：</strong></p><p><strong>1.定义一个“玩家”类（Player）：</strong><br><strong>属性：生命值、攻击力、防御力等</strong><br><strong>方法：攻击怪物（attack()）、升级（levelUp()）</strong></p><p><strong>2.继承和扩展：</strong><br><strong>如果有不同类型的玩家角色，比如战士（Warrior）、法师（Mage），我们可以让Warrior和Mage继承Player类，这样它们就自动拥有了生命值、攻击力等属性和攻击、升级等方法</strong><br><strong>我们可以为Warrior增加“近战攻击”方法（meleeAttack()），为Mage增加“施法”方法（castSpell()），这样每种角色都有独特的行为，而不需要重复编写基础属性</strong></p><p><strong>3.怪物类（Monster）：</strong><br><strong>我们也可以定义一个Monster类，包含怪物的生命值和攻击力</strong><br><strong>通过定义方法如attackPlayer()，实现怪物对玩家的攻击</strong></p><p><strong>4.道具类（Item）：</strong><br><strong>还可以定义道具类，包含道具名称、效果等属性</strong><br><strong>比如药水类可以恢复玩家的生命值，而武器类可以提升玩家的攻击力</strong></p><p><strong>从上面的例子我们不难看出面向过程的特点：</strong><br><strong>1.模块化：每个类都包含属性和行为，Player类中的方法直接操作Player的数据，怪物则自成一体</strong><br><strong>2.继承性：Warrior、Mage继承自Player，只需扩展各自的特性，而无需重复代码</strong><br><strong>3.封装性：属性和行为封装在类内，外部代码无需关心具体实现，只需调用方法</strong><br><strong>4.扩展性：可以轻松添加新角色或功能，如增加“弓箭手”类，继承Player类，扩展新技能，不影响已有代码</strong></p><h2 id="三-面向对象-vs-面向过程：对比分析"><a href="#三-面向对象-vs-面向过程：对比分析" class="headerlink" title="三.面向对象 vs. 面向过程：对比分析"></a>三.面向对象 vs. 面向过程：对比分析</h2><h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><p><strong>1.面向对象是对面向过程的进一步抽象，结构上更清晰，适合管理复杂系统</strong><br><strong>2.二者的基本逻辑相同，但面向对象在逻辑结构和扩展性上更优</strong></p><h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p><strong>1.核心思维：面向过程以步骤和流程为主，逐步实现目标。面向对象通过类和对象组织代码，模块化更高</strong><br><strong>2.代码结构：面向过程的代码较分散，面向对象将数据和操作结合，封装在类中，结构更紧密</strong><br><strong>3.适用场景：面向过程适合简单、线性逻辑；面向对象适合复杂系统，方便维护和扩展</strong></p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><strong>通过面向对象编程，我们可以更轻松地在游戏中管理不同角色、怪物、道具的行为和状态。这种模块化的设计方式不仅让代码更易读，还使得后续扩展和维护更加简单。在C++中，面向对象为我们提供了丰富的表达能力，从而使游戏设计更具灵活性和扩展性</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+          <category> C++ </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+            <tag> 程序设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>好用的网站 www.______.com😏</title>
       <link href="/2024/11/11/%E5%A5%BD%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/"/>
       <url>/2024/11/11/%E5%A5%BD%E7%94%A8%E7%9A%84%E7%BD%91%E7%AB%99/</url>
@@ -23,6 +52,8 @@
         <tags>
             
             <tag> 每日搜罗 </tag>
+            
+            <tag> 宝藏网站 </tag>
             
         </tags>
       
