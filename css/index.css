@@ -1353,8 +1353,8 @@ canvas:not(#ribbon-canvas) {
   --dark-grey: #cacaca;
   --white: #fff;
   --text-highlight-color: #1f2d3d;
-  --blockquote-color: #6a737d;
-  --blockquote-bg: rgba(73,177,245,0.1);
+  --blockquote-color: #0b7bc4;
+  --blockquote-bg: rgba(73,177,245,0.08);
   --reward-pop: #f5f5f5;
   --toc-link-color: #666261;
   --card-box-shadow: 0 3px 8px 6px rgba(7,17,27,0.05);
@@ -1515,7 +1515,7 @@ img[data-lazy-src].error {
 blockquote {
   margin: 0 0 20px;
   padding: 7px 15px;
-  border-left: 4px solid #49b1f5;
+  border-left: 4px solid rgba(73,177,245,0.8);
   background-color: var(--blockquote-bg);
   color: var(--blockquote-color);
   border-radius: 6px;
@@ -5612,13 +5612,13 @@ blockquote.pullquote.right {
 }
 .toggle {
   margin-bottom: 20px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid rgba(73,177,245,0.45);
   border-radius: 5px;
   overflow: hidden;
 }
 .toggle > .toggle-button {
   padding: 6px 15px;
-  background: #f0f0f0;
+  background: rgba(73,177,245,0.45);
   color: #1f2d3d;
   cursor: pointer;
 }
@@ -6402,8 +6402,8 @@ blockquote.pullquote.right {
   --dark-grey: rgba(255,255,255,0.2);
   --white: rgba(255,255,255,0.9);
   --text-highlight-color: rgba(255,255,255,0.9);
-  --blockquote-color: rgba(255,255,255,0.7);
-  --blockquote-bg: #2c2c2c;
+  --blockquote-color: #0b7bc4;
+  --blockquote-bg: rgba(73,177,245,0.08);
   --reward-pop: #2c2c2c;
   --toc-link-color: rgba(255,255,255,0.6);
   --scrollbar-color: #525252;
