@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>Python 环境搭建</title>
+      <link href="/2025/10/20/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Pythobn%E7%9A%84%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"/>
+      <url>/2025/10/20/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Pythobn%E7%9A%84%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Python 作为一款跨平台编程语言，能够在多种主流操作系统及环境中运行。本章将指导您完成本地 Python 开发环境的安装与配置。</p><p>目前，Python 已广泛兼容以下系统平台：</p><ul><li><strong>桌面操作系统</strong>：Windows（7及以上版本）、macOS（所有主流版本）、Linux（Ubuntu、Debian、Fedora、CentOS等）</li><li><strong>类 Unix 系统</strong>：FreeBSD、OpenBSD 等</li><li><strong>嵌入式设备</strong>：树莓派等开发板</li><li><strong>移动平台</strong>：通过 Kivy 等框架支持 iOS 和 Android</li><li><strong>云服务平台</strong>：AWS、Google Cloud、Azure 等</li></ul><h2 id="环境检查与准备工作"><a href="#环境检查与准备工作" class="headerlink" title="环境检查与准备工作"></a>环境检查与准备工作</h2><h3 id="打开终端-命令提示符"><a href="#打开终端-命令提示符" class="headerlink" title="打开终端&#x2F;命令提示符"></a>打开终端&#x2F;命令提示符</h3><p>在检查 Python 安装前，需要先打开系统终端：</p><p><strong>Windows</strong></p><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 方法<span class="number">1</span>：按 Win+R，输入 <span class="built_in">cmd</span> 回车</span><br><span class="line"># 方法<span class="number">2</span>：在开始菜单搜索&quot;命令提示符&quot;或&quot;<span class="built_in">CMD</span>&quot;</span><br><span class="line"># 方法<span class="number">3</span>：按 Win+X，选择&quot;终端&quot;（或终端管理员）</span><br></pre></td></tr></table></figure><p><strong>macOS</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1：Cmd+空格，搜索&quot;终端&quot;</span></span><br><span class="line"><span class="comment"># 方法2：应用程序-实用工具-终端</span></span><br><span class="line"><span class="comment"># 方法3：使用 iTerm2 等第三方终端</span></span><br></pre></td></tr></table></figure><p><strong>Linux</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法1：Ctrl+Alt+T（大多数发行版）</span></span><br><span class="line"><span class="comment"># 方法2：应用程序-系统工具-终端</span></span><br><span class="line"><span class="comment"># 方法3：右键桌面选择&quot;打开终端&quot;</span></span><br></pre></td></tr></table></figure><h3 id="检查-Python-安装"><a href="#检查-Python-安装" class="headerlink" title="检查 Python 安装"></a>检查 Python 安装</h3><p>打开终端后，输入以下命令检查 Python 状态：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查 Python 是否安装及版本</span></span><br><span class="line">python --version</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">python3 --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在某些系统中可能需要使用特定版本号</span></span><br><span class="line">python3.9 --version</span><br><span class="line">python3.11 --version</span><br></pre></td></tr></table></figure><p>如果系统已安装 Python，命令将返回版本号；如果未安装，会显示”未找到命令”或类似提示。</p><h3 id="各平台安装指引"><a href="#各平台安装指引" class="headerlink" title="各平台安装指引"></a>各平台安装指引</h3><p><strong>Windows</strong></p><ul><li>访问 python.org 下载官方安装包</li><li>安装时勾选”Add Python to PATH”</li><li>可通过 Microsoft Store 安装</li></ul><p><strong>macOS</strong></p><ul><li>使用 Homebrew：<code>brew install python</code></li><li>下载官方安装包</li><li>系统可能预装 Python，但建议安装新版</li></ul><p><strong>Linux</strong></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Ubuntu/Debian</span></span><br><span class="line"><span class="built_in">sudo</span> apt update &amp;&amp; <span class="built_in">sudo</span> apt install python3</span><br><span class="line"></span><br><span class="line"><span class="comment"># CentOS/RHEL</span></span><br><span class="line"><span class="built_in">sudo</span> yum install python3</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或使用包管理器</span></span><br><span class="line"><span class="built_in">sudo</span> dnf install python3</span><br></pre></td></tr></table></figure><p>完成安装后，重新打开终端并再次运行 <code>python --version</code> 确认安装成功。</p><h2 id="Python-下载"><a href="#Python-下载" class="headerlink" title="Python 下载"></a>Python 下载</h2><p>Python 的最新源码，二进制文档，新闻资讯都可以在官网查询到，以下是 Python 官网：<br><a href="https://www.python.org/">https://www.python.org/</a><br>你可以在以下链接中下载 Python 的文档，但是考虑到部分人访问官网会很慢，所以这里提供一个国内的网站来供大家下载（Python3.7版的）：<br><a href="https://repo.huaweicloud.com/python/3.7.9/">https://repo.huaweicloud.com/python/3.7.9/</a></p><p>进入网站之后，按照下面图示，选择这个版本的安装即可</p><div style="text-align:center">  <img src="/img_2/QQ截图20251021000450.png" alt="选择下载的文件" style="width:50%;" ></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+          <category> Python 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python 的基本简介</title>
+      <link href="/2025/10/20/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%E5%9F%BA%E6%9C%AC%E7%AE%80%E4%BB%8B/"/>
+      <url>/2025/10/20/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%E5%9F%BA%E6%9C%AC%E7%AE%80%E4%BB%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><h2 id="谁适合阅读这部分教程？"><a href="#谁适合阅读这部分教程？" class="headerlink" title="谁适合阅读这部分教程？"></a>谁适合阅读这部分教程？</h2><p>本教程适合刚开始学习编程或者刚开始学习 <strong>Python</strong> 编程语言的开发人员。当然，这部分教程也会对一些模块进行深入，让大家更好的了解 <strong>Python</strong> 在实际的应用。这部分教程主要是针对 <strong>Python</strong> 2.x的学习。</p><h2 id="一些关于Python的小知识"><a href="#一些关于Python的小知识" class="headerlink" title="一些关于Python的小知识"></a>一些关于Python的小知识</h2><p>Python 是一种解释型、面向对象、动态数据类型的高级程序设计语言。</p><p>Python 由 Guido van Rossum 于 1989 年底发明，第一个公开发行版发行于 1991 年。</p><p>像 Perl 语言一样, Python 源代码同样遵循 GPL(GNU General Public License) 协议。</p><p>官方宣布，2020 年 1 月 1 日， 停止 Python 2 的更新。</p><p>Python 2.7 被确定为最后一个 Python 2.x 版本。</p><p><strong>PS</strong> : 上面提到的一些词汇，解释型、面向对象、GPL。点击文字即可跳转了解</p><h2 id="Pyhton的特点"><a href="#Pyhton的特点" class="headerlink" title="Pyhton的特点"></a>Pyhton的特点</h2><p>Python 作为一种流行的编程语言，具有以下多方面的优势：</p><ol><li><p><strong>语法亲和，快速上手</strong>：Python 的关键字数量有限，语法结构简洁规范，非常适合编程初学者入门学习。</p></li><li><p><strong>代码清晰，可读性强</strong>：其语法设计强调可读性，使得代码结构清晰、易于理解，如同阅读英文段落一般自然。</p></li><li><p><strong>源码整洁，维护便捷</strong>：Python 代码通常具有良好的可维护性，这使得项目长期维护和团队协作变得更加高效。</p></li><li><p><strong>标准库丰富，跨平台支持</strong>：拥有功能全面、跨平台兼容的标准库，覆盖网络通信、文件处理、数据处理等多个领域，为开发者提供了强大支持。</p></li><li><p><strong>交互式编程，即时反馈</strong>：提供交互式解释器环境，支持代码片段的即时测试与调试，便于快速验证想法和排查问题。</p></li><li><p><strong>开源移植，多平台运行</strong>：作为开源语言，Python 已被成功移植到多种操作系统平台上，具备良好的可移植性。</p></li><li><p><strong>扩展灵活，性能可优化</strong>：开发者可通过 C&#x2F;C++ 编写关键性能模块，并在 Python 中调用，兼顾开发效率与执行性能。</p></li><li><p><strong>数据库接口完善</strong>：提供了对各种主流商业数据库的连接支持，方便进行数据存储与管理操作。</p></li><li><p><strong>图形界面开发支持</strong>：内置 GUI 开发库，同时支持集成第三方工具，能够创建跨平台的桌面应用程序。</p></li><li><p><strong>嵌入集成，脚本化扩展</strong>：可将 Python 解释器嵌入到 C&#x2F;C++ 应用程序中，为原有程序添加脚本化扩展能力。</p></li></ol><p>基本的就介绍到这里，感兴趣的可以自己去阅读一些书籍，这章内容主要是简单介绍一下 <strong>Python</strong> 语言，下一章内容将会介绍如何搭建Python的环境搭建。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+          <category> Python 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C语言位域</title>
       <link href="/2025/02/06/C%E8%AF%AD%E8%A8%80%E4%BD%8D%E5%9F%9F/"/>
       <url>/2025/02/06/C%E8%AF%AD%E8%A8%80%E4%BD%8D%E5%9F%9F/</url>
