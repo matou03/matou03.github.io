@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Python 循环语句</title>
+      <link href="/2025/10/27/Python%20%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/"/>
+      <url>/2025/10/27/Python%20%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Python-循环语句"><a href="#Python-循环语句" class="headerlink" title="Python 循环语句"></a>Python 循环语句</h1><p>在前面的学习中，我们写的代码大多是一行接一行地顺序执行，就像我们一步一步地走路一样，做完一件事再做下一件</p><p>但是，如果我们需要做很多重复的事情，比如打印 100 遍 “Hello World”，或者计算 1 到 100 的总和，难道我们要把相同的代码写 100 遍吗？那会非常的麻烦！</p><p>但是，别担心，编程之所以强大，就是因为它能让计算机帮我们做重复的工作。<strong>循环语句</strong>就是实现这种重复的魔法</p><h2 id="什么是循环？"><a href="#什么是循环？" class="headerlink" title="什么是循环？"></a>什么是循环？</h2><p>简单说，<strong>循环就是让一部分代码按照我们设定的条件，重复执行多次的结构</strong>。</p><p>你可以这么设想：</p><ul><li>你想打印 5 遍 “我爱 Python！”。如果没有循环，你可能需要写 5 行 <code>print(&quot;我爱 Python！&quot;)</code>。有了循环，几句话就能搞定</li><li>游戏里角色的移动、敌人的刷新，背后都离不开循环的控制。</li></ul><h2 id="循环是如何工作的？"><a href="#循环是如何工作的？" class="headerlink" title="循环是如何工作的？"></a>循环是如何工作的？</h2><p>我们可以把循环看成一个<strong>检查点</strong>和一个<strong>执行区</strong>：</p><ol><li><strong>来到检查点</strong>：看看现在是不是该执行<strong>执行区</strong>里的代码。</li><li><strong>如果条件允许</strong>，比如：我还没打印够 5 遍，就进入<strong>执行区</strong>执行代码。</li><li><strong>执行完一次后</strong>，再次回到<strong>检查点</strong>。</li><li><strong>如果条件不允许了</strong>，比如：我已经打印够 5 遍了，就离开循环，继续执行循环后面的代码</li></ol><p>下面是一个简单的程序框图，展示了循环的一般工作流程：</p><div style="text-align:center">  <img src="/img_2/mermaid-1761627690264.png" alt="程序框图" style="width:50%;"></div><h2 id="Python-中的循环类型"><a href="#Python-中的循环类型" class="headerlink" title="Python 中的循环类型"></a>Python 中的循环类型</h2><p>Python 主要提供了两种类型的循环语句，让我们能应对不同的重复场景：</p><h3 id="1-while-循环"><a href="#1-while-循环" class="headerlink" title="1. while 循环"></a>1. <code>while</code> 循环</h3><ul><li><strong>特点</strong>：<strong>只要给定的条件为真（True），就会一直重复执行循环体里的代码</strong>。</li><li><strong>就像</strong>：“只要天还没黑，我就继续玩。” 这里“天还没黑”就是条件，“继续玩”就是循环体。</li></ul><h3 id="2-for-循环"><a href="#2-for-循环" class="headerlink" title="2. for 循环"></a>2. <code>for</code> 循环</h3><ul><li><strong>特点</strong>：<strong>通常用于遍历序列中的每个元素，就比如列表和字符串，或者执行固定次数的循环</strong>。</li><li><strong>就像</strong>：“我有一个水果篮子，里面有苹果、香蕉、橘子，我要把它们一个一个拿出来吃掉。” 这里“水果篮子”就是一个序列，“一个一个拿出来吃掉”就是循环体。</li></ul><h3 id="3-嵌套循环"><a href="#3-嵌套循环" class="headerlink" title="3. 嵌套循环"></a>3. 嵌套循环</h3><ul><li><strong>特点</strong>：<strong>在一个循环的内部，再放一个循环</strong>。这就像俄罗斯套娃一样。</li><li><strong>用途</strong>：处理更复杂的重复任务，比如打印一个矩阵</li></ul><h2 id="循环控制语句"><a href="#循环控制语句" class="headerlink" title="循环控制语句"></a>循环控制语句</h2><p>有时候，我们不希望循环严格按照条件判断 -&gt; 执行的固定流程走。比如，我们可能想提前结束整个循环，或者跳过当前这次循环剩下的部分，直接开始下一次</p><p>Python 提供了几种<strong>循环控制语句</strong>来帮助我们更灵活地控制循环：</p><h3 id="1-break-语句"><a href="#1-break-语句" class="headerlink" title="1. break 语句"></a>1. <code>break</code> 语句</h3><ul><li><strong>作用</strong>：<strong>立即终止当前的整个循环，并且跳出循环体，不再执行后续的循环迭代</strong>。</li><li><strong>就像</strong>：你在看书，突然电话响了，你不得不立刻停止看书，不管看到第几页，去接电话。</li></ul><h3 id="2-continue-语句"><a href="#2-continue-语句" class="headerlink" title="2. continue 语句"></a>2. <code>continue</code> 语句</h3><ul><li><strong>作用</strong>：<strong>立即终止当前这一次的循环迭代，跳过循环体中 <code>continue</code> 后面剩余的语句，直接进入下一次循环的条件判断</strong>。</li><li><strong>就像</strong>：你在吃一串葡萄，吃到一颗特别酸的，你会把这颗吐掉，然后继续吃下一颗，而不是把整串葡萄都扔了。</li></ul><h3 id="3-pass-语句"><a href="#3-pass-语句" class="headerlink" title="3. pass 语句"></a>3. <code>pass</code> 语句</h3><ul><li><strong>作用</strong>：**<code>pass</code> 是一个空语句，它什么也不做**。主要是为了在语法上需要一条语句，但我们暂时不想写具体代码的时候使用，用来保持程序结构的完整性。</li><li><strong>就像</strong>：你在日程本上写下“明天要学习循环”，但具体怎么学还没想好，先记下来占个位置。</li></ul><hr><p>好了，到这里，相信你已经对 Python 循环有了一个基本的概念性了解。接下来的内容，我会详细学习每一种循环和控制语句的具体用法</p><h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+          <category> Python 教程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 编程 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Python 条件语句</title>
       <link href="/2025/10/27/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/"/>
       <url>/2025/10/27/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%9D%A1%E4%BB%B6%E8%AF%AD%E5%8F%A5/</url>
