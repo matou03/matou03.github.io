@@ -1,0 +1,1248 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python 日期和时间 | Matou🚢</title><meta name="author" content="码头"><meta name="copyright" content="码头"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Python 日期和时间想想看，我们日常生活中是不是经常要和日期时间打交道？比如：  记录一件事情发生的时间。 看看还有多少天到假期。 手机上的闹钟、日历提醒。  在编程的世界里，日期和时间同样非常重要。Python 作为一门强大又易用的编程语言，当然也提供了方便的工具来帮助我们处理各种与日期时间相关的任务，比如获取现在几点了、计算两个日期之间差了多少天，或者把日期显示成我们喜欢的格式，比如 20">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 日期和时间">
+<meta property="og:url" content="https://blog.toumatou.cn/2025/10/30/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/index.html">
+<meta property="og:site_name" content="Matou🚢">
+<meta property="og:description" content="Python 日期和时间想想看，我们日常生活中是不是经常要和日期时间打交道？比如：  记录一件事情发生的时间。 看看还有多少天到假期。 手机上的闹钟、日历提醒。  在编程的世界里，日期和时间同样非常重要。Python 作为一门强大又易用的编程语言，当然也提供了方便的工具来帮助我们处理各种与日期时间相关的任务，比如获取现在几点了、计算两个日期之间差了多少天，或者把日期显示成我们喜欢的格式，比如 20">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog.toumatou.cn/img/CFB91614C14711CE1BF5E11E3DD07D85.png">
+<meta property="article:published_time" content="2025-10-30T08:20:12.000Z">
+<meta property="article:modified_time" content="2025-11-05T01:19:02.772Z">
+<meta property="article:author" content="码头">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.toumatou.cn/img/CFB91614C14711CE1BF5E11E3DD07D85.png"><link rel="shortcut icon" href="/img/4B8A4C218E44A599CE21B2FBC4923283.jpg"><link rel="canonical" href="https://blog.toumatou.cn/2025/10/30/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!true && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const hour = new Date().getHours()
+          const isNight = hour <= 6 || hour >= 18
+          if (theme === undefined) isNight ? activateDarkMode() : activateLightMode()
+          else theme === 'light' ? activateLightMode() : activateDarkMode()
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":230,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: 码头","link":"链接: ","source":"来源: Matou🚢","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"已切换为繁体中文","cht_to_chs":"已切换为简体中文","day_to_night":"已切换为深色模式","night_to_day":"已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#1f1f1f","position":"top-right"},
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: true,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python 日期和时间',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-11-05 09:19:02'
+}</script><link rel="stylesheet" href="/css/style.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://npm.elemecdn.com/echarts@4.9.0/dist/echarts.min.js"></script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-categories-card@1.0.0/lib/categorybar.css"><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (true) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web-bg"><div id="default-bg" style="background:url(/img/2E7ACD823C75B4E15C31DEC35C63511F.jpg);"></div><div id="dark-bg" style="background:url(/img/A5368A5D94E696673F57E876105F834F.jpg);"></div><div id="mobile-bg" style="background:url(/img/2E7ACD823C75B4E15C31DEC35C63511F.jpg);"></div><div id="mobile-dark-bg" style="background:url(/img/A5368A5D94E696673F57E876105F834F.jpg);"> </div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/CFB91614C14711CE1BF5E11E3DD07D85.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fa-solid fa-folder-open"></i><span> 留言板</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/2E7ACD823C75B4E15C31DEC35C63511F.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/CFB91614C14711CE1BF5E11E3DD07D85.png" alt="Logo"><span class="site-name">Matou🚢</span></a><a class="nav-page-title" href="/"><span class="site-name">Python 日期和时间</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw fa-solid fa-folder-open"></i><span> 留言板</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Python 日期和时间</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-30T08:20:12.000Z" title="发表于 2025-10-30 16:20:12">2025-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-11-05T01:19:02.772Z" title="更新于 2025-11-05 09:19:02">2025-11-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B/Python-%E6%95%99%E7%A8%8B/">Python 教程</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">12.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>46分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Python-日期和时间"><a href="#Python-日期和时间" class="headerlink" title="Python 日期和时间"></a>Python 日期和时间</h1><p>想想看，我们日常生活中是不是经常要和日期时间打交道？比如：</p>
+<ul>
+<li>记录一件事情发生的时间。</li>
+<li>看看还有多少天到假期。</li>
+<li>手机上的闹钟、日历提醒。</li>
+</ul>
+<p>在编程的世界里，日期和时间同样非常重要。Python 作为一门强大又易用的编程语言，当然也提供了方便的工具来帮助我们处理各种与日期时间相关的任务，比如获取现在几点了、计算两个日期之间差了多少天，或者把日期显示成我们喜欢的格式，比如 <code>2024年5月20日</code> 或者 <code>05/20/2024</code></p>
+<h2 id="1-时间都去哪儿了？"><a href="#1-时间都去哪儿了？" class="headerlink" title="1. 时间都去哪儿了？"></a>1. 时间都去哪儿了？</h2><p>在我们开始学习具体怎么用 Python 处理日期时间之前，先来了解一个非常基础也非常重要的概念：**时间戳 (Timestamp)**。</p>
+<p>你有没有想过，电脑是怎么记住时间的呢？它不像我们人类一样看日历、看钟表。电脑有它自己独特的记时方式。</p>
+<p><strong>时间戳</strong>，简单来说，就是一个数字。这个数字代表的是<strong>从一个特定的起始时间点开始，到某个时刻为止，一共经过了多少秒</strong>。</p>
+<p>这个特定的起始时间点，在很多计算机系统中是<strong>1970年1月1日 00:00:00 UTC</strong>（也就是协调世界时，也可以简单理解为格林尼治标准时间）。我们把这个起始点叫做<strong>Unix 纪元 (Unix Epoch)</strong> 。</p>
+<p>所以，如果我说某个时间戳是 <code>1716182400</code>，这就代表从 1970年1月1日 00:00:00 UTC 开始，过了 1716182400 秒之后的那个时刻。</p>
+<p>为什么要用这种方式呢？因为数字方便计算啊！比如，要计算两个时间点之间相差多久，直接用两个时间戳相减就可以得到相差的秒数，非常简单直接。</p>
+<h3 id="1-1-用-Python-获取当前时间戳"><a href="#1-1-用-Python-获取当前时间戳" class="headerlink" title="1.1 用 Python 获取当前时间戳"></a>1.1 用 Python 获取当前时间戳</h3><p>那么，我们怎么用 Python 来获取当前的时间戳呢？Python 内置了一个叫做 <code>time</code> 的**模块 (Module)**。模块就像是一个工具包，里面装了很多现成的工具可以供我们使用。</p>
+<p>我们可以这样做：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引入 time 模块，就像打开工具箱</span></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 time 模块里的 time() 函数获取当前时间戳</span></span><br><span class="line">current_timestamp = time.time()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印出这个时间戳</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前时间戳是：&quot;</span>, current_timestamp)</span><br></pre></td></tr></table></figure>
+
+<p>如果现在运行这段代码，你可能会看到类似这样的输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">当前时间戳是： 1716182400.123456</span><br></pre></td></tr></table></figure>
+<p><strong>（需要注意的是，你实际运行时得到的数字肯定和这个不一样，因为时间一直在走嘛！）</strong></p>
+<p>你看，这个时间戳是一个<strong>带小数点的数（浮点数）</strong>。整数部分代表秒，小数部分代表秒的小数部分，也就是毫秒、微秒等更精确的时间。</p>
+<p><strong>小思考：</strong></p>
+<ul>
+<li>为什么时间戳通常用 1970年作为起点呢？这其实是早期 Unix 系统的设计决定，后来就被广泛沿用了。</li>
+<li>时间戳能表示所有时间吗？理论上，因为它是一个数字，所以可以表示很大或很小的数。但在实际中，由于计算机存储数字的方式有范围限制，太遥远的过去（比如 1970年之前很久）或太遥远的未来（比如很多年后）的时间戳可能无法准确表示。不过对于我们日常使用来说，完全够用了。</li>
+</ul>
+<h2 id="2-Python-时间工具包-——-time-模块"><a href="#2-Python-时间工具包-——-time-模块" class="headerlink" title="2. Python 时间工具包 —— time 模块"></a>2. Python 时间工具包 —— <code>time</code> 模块</h2><p>刚才我们已经用到了 <code>time</code> 模块里的 <code>time()</code> 函数来获取时间戳。<code>time</code> 模块是 Python 处理时间的基础模块之一，它提供了很多与时间相关的功能。</p>
+<p>除了 <code>time()</code> 函数，<code>time</code> 模块还有很多其他有用的工具，比如：</p>
+<ul>
+<li>把时间戳转换成我们能看懂的日期时间格式。</li>
+<li>获取当前的本地时间。</li>
+<li>让程序暂停一段时间（典型的有倒计时）。</li>
+</ul>
+<p>在接下来的章节里，我们会逐步学习这些功能。</p>
+<h2 id="3-还有一个日历工具包-——-calendar-模块"><a href="#3-还有一个日历工具包-——-calendar-模块" class="headerlink" title="3. 还有一个日历工具包 —— calendar 模块"></a>3. 还有一个日历工具包 —— <code>calendar</code> 模块</h2><p>除了 <code>time</code> 模块，Python 还提供了一个 <code>calendar</code> 模块，听名字就知道，它主要是用来处理<strong>日历相关</strong>的操作。</p>
+<p>比如说：</p>
+<ul>
+<li>打印某年某月的日历。</li>
+<li>判断某一年是不是闰年。</li>
+<li>获取一个月有多少天。</li>
+</ul>
+<p><code>calendar</code> 模块就像是一个电子日历，能帮我们做很多和日期编排相关的事情。</p>
+<hr>
+<h2 id="2-时间元组-struct-time"><a href="#2-时间元组-struct-time" class="headerlink" title="2. 时间元组 (struct_time)"></a>2. 时间元组 (struct_time)</h2><p>我们已经知道时间戳是一个数字，很适合计算机进行计算。但是，这个长长的数字,比如 <code>1716182400.123456</code>。这对我们人类来说，一点也不直观，我们看不出是哪年哪月哪日，几点几分几秒。</p>
+<p>那么，Python 是如何把时间戳翻译成我们能看懂的日期和时间的呢？这就需要用到 **时间元组 (Time Tuple)**，在 Python 中它通常被称为 <code>struct_time</code> 对象。</p>
+<h3 id="2-1-什么是时间元组？"><a href="#2-1-什么是时间元组？" class="headerlink" title="2.1 什么是时间元组？"></a>2.1 什么是时间元组？</h3><p><strong>时间元组</strong>，顾名思义，就是一个包含了时间各个组成部分的**元组 (Tuple)**。元组是 Python 中的一种数据类型，类似于列表，但元素不能修改。</p>
+<p>这个特殊的元组里包含了 <strong>9 个数字</strong>，每个数字代表时间的一个特定部分，比如年份、月份、日期、小时、分钟等等。</p>
+<p>下面就是这个时间元组中每个位置（序号）对应的含义和取值范围：</p>
+<table>
+<thead>
+<tr>
+<th align="left">序号 (Index)</th>
+<th align="left">字段名称 (Field)</th>
+<th align="left">取值范围和说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">tm_year</td>
+<td align="left">四位数年份，例如：2024</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">tm_mon</td>
+<td align="left">月份，1 到 12</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">tm_mday</td>
+<td align="left">日，1 到 31</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">tm_hour</td>
+<td align="left">小时，0 到 23</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">tm_min</td>
+<td align="left">分钟，0 到 59</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">tm_sec</td>
+<td align="left">秒，0 到 61（60或61 是闰秒，比较少见）</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">tm_wday</td>
+<td align="left">一周的第几日，0 到 6（<strong>0 代表星期一</strong>，6 代表星期日）</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">tm_yday</td>
+<td align="left">一年的第几日，1 到 366（儒略日，考虑闰年）</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">tm_isdst</td>
+<td align="left">夏令时标志，-1, 0, 1。<br>- 1: 是夏令时<br>0: 不是夏令时<br>-1: 不确定（这由系统决定）</td>
+</tr>
+</tbody></table>
+<p>除了通过序号访问，<code>struct_time</code> 对象的这些字段也可以通过 <strong>属性名</strong> 来访问，比如 <code>struct_time.tm_year</code> 就表示年份。</p>
+<p><strong>提醒：</strong> <code>tm_wday</code> 这里要特别注意一下，0 代表星期一，而不是我们有时习惯认为的星期日，这一点在编程时很容易搞错！</p>
+<h3 id="2-2-如何获取时间元组？"><a href="#2-2-如何获取时间元组？" class="headerlink" title="2.2 如何获取时间元组？"></a>2.2 如何获取时间元组？</h3><p>我们可以通过 <code>time</code> 模块的一些函数，将时间戳转换为时间元组，或者直接获取当前时间的时间元组。</p>
+<p>最常用的函数有：</p>
+<ol>
+<li><p><code>time.localtime([timestamp])</code></p>
+<ul>
+<li>功能：将一个时间戳转换为<strong>本地时间</strong>的时间元组 <code>struct_time</code>。</li>
+<li>如果不提供 <code>timestamp</code> 参数（即括号里为空），则默认使用当前时间的时间戳。</li>
+</ul>
+</li>
+<li><p><code>time.gmtime([timestamp])</code></p>
+<ul>
+<li>功能：将一个时间戳转换为<strong>UTC时间</strong>的时间元组 <code>struct_time</code>。</li>
+<li>如果不提供 <code>timestamp</code> 参数，则默认使用当前时间的时间戳。</li>
+</ul>
+</li>
+</ol>
+<p><strong>实例1：获取当前本地时间的时间元组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前时间的时间元组 (本地时间)</span></span><br><span class="line">local_time_tuple = time.localtime()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地时间的时间元组:&quot;</span>, local_time_tuple)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;类型:&quot;</span>, <span class="built_in">type</span>(local_time_tuple))  <span class="comment"># 看看它的类型</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过序号访问元组元素</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;年份 (通过序号 0):&quot;</span>, local_time_tuple[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;月份 (通过序号 1):&quot;</span>, local_time_tuple[<span class="number">1</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通过属性名访问 (更推荐，可读性更好)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;年份 (通过属性 tm_year):&quot;</span>, local_time_tuple.tm_year)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;月份 (通过属性 tm_mon):&quot;</span>, local_time_tuple.tm_mon)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;日期 (通过属性 tm_mday):&quot;</span>, local_time_tuple.tm_mday)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;小时 (通过属性 tm_hour):&quot;</span>, local_time_tuple.tm_hour)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;分钟 (通过属性 tm_min):&quot;</span>, local_time_tuple.tm_min)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;秒 (通过属性 tm_sec):&quot;</span>, local_time_tuple.tm_sec)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;星期几 (tm_wday, 0=周一):&quot;</span>, local_time_tuple.tm_wday)  <span class="comment"># 注意这里！</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;一年中的第几天 (tm_yday):&quot;</span>, local_time_tuple.tm_yday)</span><br></pre></td></tr></table></figure>
+
+<p><strong>运行这段代码，你会看到类似这样的输出</strong>（不过具体数值会因你运行的时间而不同）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">当前本地时间的时间元组: time.struct_time(tm_year=2024, tm_mon=5, tm_mday=20, tm_hour=15, tm_min=30, tm_sec=45, tm_wday=0, tm_yday=141, tm_isdst=0)</span><br><span class="line">类型: &lt;class &#x27;time.struct_time&#x27;&gt;</span><br><span class="line">年份 (通过序号 0): 2024</span><br><span class="line">月份 (通过序号 1): 5</span><br><span class="line">年份 (通过属性 tm_year): 2024</span><br><span class="line">月份 (通过属性 tm_mon): 5</span><br><span class="line">日期 (通过属性 tm_mday): 20</span><br><span class="line">小时 (通过属性 tm_hour): 15</span><br><span class="line">分钟 (通过属性 tm_min): 30</span><br><span class="line">秒 (通过属性 tm_sec): 45</span><br><span class="line">星期几 (tm_wday, 0=周一): 0  # 这表示今天是星期一！</span><br><span class="line">一年中的第几天 (tm_yday): 141</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例2：将一个已知时间戳转换为时间元组</strong></p>
+<p>假设我们有一个时间戳 <code>1716182400</code> (这个时间戳对应的是 2024年5月20日 00:00:00 UTC，具体如何计算出来的我们后面会学)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">timestamp = <span class="number">1716182400</span></span><br><span class="line"><span class="comment"># 将时间戳转换为本地时间元组</span></span><br><span class="line">local_time = time.localtime(timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;时间戳&quot;</span>, timestamp, <span class="string">&quot;对应的本地时间元组:&quot;</span>, local_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;对应的本地日期时间:&quot;</span>, local_time.tm_year, <span class="string">&quot;年&quot;</span>, local_time.tm_mon, <span class="string">&quot;月&quot;</span>, local_time.tm_mday, <span class="string">&quot;日&quot;</span>,</span><br><span class="line">      local_time.tm_hour, <span class="string">&quot;时&quot;</span>, local_time.tm_min, <span class="string">&quot;分&quot;</span>, local_time.tm_sec, <span class="string">&quot;秒&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将时间戳转换为 UTC 时间元组</span></span><br><span class="line">utc_time = time.gmtime(timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;时间戳&quot;</span>, timestamp, <span class="string">&quot;对应的 UTC 时间元组:&quot;</span>, utc_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;对应的 UTC 日期时间:&quot;</span>, utc_time.tm_year, <span class="string">&quot;年&quot;</span>, utc_time.tm_mon, <span class="string">&quot;月&quot;</span>, utc_time.tm_mday, <span class="string">&quot;日&quot;</span>,</span><br><span class="line">      utc_time.tm_hour, <span class="string">&quot;时&quot;</span>, utc_time.tm_min, <span class="string">&quot;分&quot;</span>, utc_time.tm_sec, <span class="string">&quot;秒&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>你可能会看到的输出</strong>（注意本地时间和UTC时间可能因为时区不同而有差异，比如中国是 UTC+8）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">时间戳 1716182400 对应的本地时间元组: time.struct_time(tm_year=2024, tm_mon=5, tm_mday=20, tm_hour=8, tm_min=0, tm_sec=0, tm_wday=0, tm_yday=141, tm_isdst=0)</span><br><span class="line">对应的本地日期时间: 2024 年 5 月 20 日 8 时 0 分 0 秒</span><br><span class="line">时间戳 1716182400 对应的 UTC 时间元组: time.struct_time(tm_year=2024, tm_mon=5, tm_mday=20, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=0, tm_yday=141, tm_isdst=0)</span><br><span class="line">对应的 UTC 日期时间: 2024 年 5 月 20 日 0 时 0 分 0 秒</span><br></pre></td></tr></table></figure>
+<p>（解释：对于中国用户，本地时间是 UTC+8，所以 UTC 的 0 点，是北京时间的早上 8 点。）</p>
+<h3 id="2-3-时间元组的作用"><a href="#2-3-时间元组的作用" class="headerlink" title="2.3 时间元组的作用"></a>2.3 时间元组的作用</h3><p>时间元组是时间戳和我们人类可读的日期时间字符串之间的一个重要桥梁。</p>
+<ul>
+<li><strong>时间戳 -&gt; 时间元组</strong>：通过 <code>localtime()</code> 或 <code>gmtime()</code>，我们可以把计算机容易理解的时间戳，转换成包含年月日时分秒等信息的时间元组。</li>
+<li><strong>时间元组 -&gt; 格式化字符串</strong>：有了时间元组，我们就可以进一步把它格式化成各种我们想要的字符串形式，比如 <code>&quot;2024-05-20&quot;</code> 或者 <code>&quot;20th May, 2024 08:00:00&quot;</code>。</li>
+</ul>
+<hr>
+<h2 id="Python-time-模块内置函数"><a href="#Python-time-模块内置函数" class="headerlink" title="Python time 模块内置函数"></a>Python <code>time</code> 模块内置函数</h2><p><code>time</code> 模块提供了各种与时间相关的函数，用于获取当前时间、时间戳转换、格式化时间等。</p>
+<h3 id="1-time-altzone-获取夏令时偏移秒数"><a href="#1-time-altzone-获取夏令时偏移秒数" class="headerlink" title="1. time.altzone - 获取夏令时偏移秒数"></a>1. <code>time.altzone</code> - 获取夏令时偏移秒数</h3><details>
+<summary><b>点击查看：Python time altzone()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.altzone</code> 函数返回<strong>格林威治西部的夏令时 (DST) 地区的偏移秒数</strong>。如果该地区在格林威治东部，则返回负值（例如西欧，包括英国在夏令时期间）。这个值仅对启用了夏令时的地区有效。</p>
+<p><strong>语法</strong><br><code>altzone</code> 语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.altzone</span><br></pre></td></tr></table></figure>
+<p>（注意：这是一个模块级别的变量，不是一个需要调用的函数，因此没有括号 <code>()</code>。）</p>
+<p><strong>参数</strong></p>
+<ul>
+<li>NA（无参数）。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个整数，表示格林威治西部夏令时的偏移秒数（东为负，西为正）。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>time.altzone</code> 的使用方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;time.altzone = %d&quot;</span> % time.altzone)</span><br></pre></td></tr></table></figure>
+<p><strong>以上实例可能的输出结果（取决于你的系统时区和是否启用夏令时）：</strong><br>例如，在<strong>中国标准时间 (CST，UTC+8，不使用夏令时)</strong> 的系统上，<code>altzone</code> 的值通常为 <code>0</code> 或者一个与 <code>time.timezone</code> 相同的值，因为中国不实行夏令时。<br>在<strong>美国太平洋夏令时 (PDT，UTC-7)</strong> 的系统上，可能输出：<code>time.altzone = -25200</code> (因为 -25200 秒 &#x3D; -7 小时)。<br>在<strong>英国夏令时 (BST，UTC+1)</strong> 的系统上，可能输出：<code>time.altzone = -3600</code> (因为 -3600 秒 &#x3D; -1 小时)。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>time.altzone</code> 与 <code>time.timezone</code> 的区别：<ul>
+<li><code>time.timezone</code> 返回的是<strong>标准时间</strong>（非夏令时）下，本地时间与 UTC 的偏移秒数（西为正，东为负）。</li>
+<li><code>time.altzone</code> 返回的是<strong>夏令时</strong>下，本地时间与 UTC 的偏移秒数（西为正，东为负）。</li>
+</ul>
+</li>
+<li>如果你的系统所在地区不实行夏令时，<code>time.altzone</code> 的值可能与 <code>time.timezone</code> 相同，或者为 0（具体取决于 Python 实现和系统）。</details></li>
+</ul>
+<h3 id="2-time-asctime-tupletime-转换时间元组为可读字符串"><a href="#2-time-asctime-tupletime-转换时间元组为可读字符串" class="headerlink" title="2. time.asctime([tupletime]) - 转换时间元组为可读字符串"></a>2. <code>time.asctime([tupletime])</code> - 转换时间元组为可读字符串</h3><details>
+<summary><b>点击查看：Python time asctime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.asctime()</code> 函数用于<strong>接受一个时间元组（struct_time 对象或 9 元素元组），并将其转换为一个人类可读的字符串</strong>。字符串格式为：<code>&quot;Sun Jun 20 23:21:05 1993&quot;</code>。</p>
+<p><strong>语法</strong><br><code>asctime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.asctime([tupletime])</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>tupletime</code> (可选) – 一个包含 9 个元素的元组或一个 <code>time.struct_time</code> 对象，代表一个时间。如果未提供此参数，函数将使用 <code>time.localtime()</code> 获取当前的本地时间元组。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个 24 个字符的字符串，表示转换后的时间。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>asctime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：不提供参数，使用当前本地时间</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前时间并转换为可读字符串</span></span><br><span class="line">current_time_str = time.asctime()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前时间 (asctime):&quot;</span>, current_time_str)</span><br><span class="line"><span class="comment"># 输出可能为：当前时间 (asctime): Wed Jun 12 10:15:30 2024</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：提供一个时间元组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个时间元组 (年, 月, 日, 时, 分, 秒, 星期几(0=周一, ..., 6=周日), 一年中的第几天, 夏令时标志)</span></span><br><span class="line"><span class="comment"># 注意：星期几和一年中的第几天会被 asctime() 忽略，它会根据日期计算</span></span><br><span class="line">time_tuple = (<span class="number">2023</span>, <span class="number">12</span>, <span class="number">25</span>, <span class="number">8</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>)  <span class="comment"># 2023年12月25日 8:30:00</span></span><br><span class="line">time_str = time.asctime(time_tuple)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;指定时间 (asctime):&quot;</span>, time_str)</span><br><span class="line"><span class="comment"># 输出：指定时间 (asctime): Mon Dec 25 08:30:00 2023</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 3：与 <code>gmtime()</code> 结合使用（UTC 时间）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前 UTC 时间元组，然后转换为字符串</span></span><br><span class="line">utc_time_str = time.asctime(time.gmtime())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前 UTC 时间 (asctime):&quot;</span>, utc_time_str)</span><br></pre></td></tr></table></figure>
+</details>
+
+<h3 id="3-time-clock-测量-CPU-时间-Python-3-3-已废弃"><a href="#3-time-clock-测量-CPU-时间-Python-3-3-已废弃" class="headerlink" title="3. time.clock() - 测量 CPU 时间 (Python 3.3+ 已废弃)"></a>3. <code>time.clock()</code> - 测量 CPU 时间 (Python 3.3+ 已废弃)</h3><details>
+<summary><b>点击查看：Python time clock()方法 (已废弃)</b></summary>
+
+<p><strong>描述</strong><br><strong>注意：<code>time.clock()</code> 函数在 Python 3.3 版本中已被废弃，并在 Python 3.8 版本中被移除</strong>。它原本用于返回当前进程的 CPU 时间（以秒为单位的浮点数），常用于衡量不同程序或代码段的执行耗时。</p>
+<p>在 Python 3.3+ 中，推荐使用 <code>time.perf_counter()</code> (用于测量短持续时间的性能计数器，包含睡眠耗时) 或 <code>time.process_time()</code> (用于测量当前进程的系统和用户 CPU 时间总和，不包含睡眠耗时) 来替代。</p>
+<p><strong>语法 (仅作历史参考)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.clock()</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li>NA（无参数）。</li>
+</ul>
+<p><strong>返回值 (仅作历史参考)</strong></p>
+<ul>
+<li>返回一个浮点数，表示当前进程的 CPU 时间（秒）。</li>
+</ul>
+<p><strong>实例 (仅作历史参考，请勿在 Python 3.8+ 中使用)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.clock()</span><br><span class="line"><span class="comment"># 模拟一些耗时操作</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">end = time.clock()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;这段代码的 CPU 耗时为: %f 秒&quot;</span> % (end - start))</span><br></pre></td></tr></table></figure>
+
+<p><strong>替代方案：</strong></p>
+<ul>
+<li><p><strong><code>time.perf_counter()</code></strong>: 推荐用于测量短时间间隔，提供最高分辨率的计时器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.perf_counter()</span><br><span class="line"><span class="comment"># 模拟一些耗时操作</span></span><br><span class="line">time.sleep(<span class="number">1</span>)  <span class="comment"># 睡眠 1 秒，会被 perf_counter 计入</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">end = time.perf_counter()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;这段代码的耗时（包括睡眠）为: %f 秒&quot;</span> % (end - start))  <span class="comment"># 大约 1.xxxx 秒</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><code>time.process_time()</code></strong>: 仅测量 CPU 实际运行时间，不包括睡眠或等待时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.process_time()</span><br><span class="line"><span class="comment"># 模拟一些耗时操作</span></span><br><span class="line">time.sleep(<span class="number">1</span>)  <span class="comment"># 睡眠 1 秒，不会被 process_time 计入</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000000</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line">end = time.process_time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;这段代码的 CPU 耗时（不包括睡眠）为: %f 秒&quot;</span> % (end - start))  <span class="comment"># 远小于 1 秒</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>总结：</strong> 请使用 <code>time.perf_counter()</code> 或 <code>time.process_time()</code> 代替已废弃的 <code>time.clock()</code>。</p>
+</details>
+
+<h3 id="4-time-ctime-secs-转换时间戳为本地时间字符串"><a href="#4-time-ctime-secs-转换时间戳为本地时间字符串" class="headerlink" title="4. time.ctime([secs]) - 转换时间戳为本地时间字符串"></a>4. <code>time.ctime([secs])</code> - 转换时间戳为本地时间字符串</h3><details>
+<summary><b>点击查看：Python time ctime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.ctime()</code> 函数用于<strong>将一个时间戳（自 epoch 以来的秒数）转换为一个本地时间的可读字符串</strong>。其作用相当于 <code>time.asctime(time.localtime(secs))</code>。如果未提供 <code>secs</code> 参数，则默认使用当前时间戳 <code>time.time()</code>。</p>
+<p><strong>语法</strong><br><code>ctime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.ctime([secs])</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>secs</code> (可选) – 一个浮点数，表示自 epoch（1970年1月1日 00:00:00 UTC）以来的秒数。如果未提供，则使用当前时间 <code>time.time()</code>。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个 24 个字符的字符串，表示本地时间，格式与 <code>asctime()</code> 相同：<code>&quot;Sun Jun 20 23:21:05 1993&quot;</code>。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>ctime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：不提供参数，使用当前时间戳</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">current_time_str = time.ctime()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地时间 (ctime):&quot;</span>, current_time_str)</span><br><span class="line"><span class="comment"># 输出可能为：当前本地时间 (ctime): Wed Jun 12 10:30:45 2024</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：提供一个特定的时间戳</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个特定的时间戳 (例如：2023年1月1日 00:00:00 UTC 的时间戳)</span></span><br><span class="line">timestamp = <span class="number">1672531200</span></span><br><span class="line">time_str = time.ctime(timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;时间戳 %d 对应的本地时间为:&quot;</span> % timestamp, time_str)</span><br><span class="line"><span class="comment"># 输出取决于你的本地时区。例如，在中国时区 (UTC+8)，会输出类似：</span></span><br><span class="line"><span class="comment"># 时间戳 1672531200 对应的本地时间为: Sun Jan  1 08:00:00 2023</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 3：与 <code>time.time()</code> 结合，获取当前时间</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">current_timestamp = time.time()</span><br><span class="line">current_time_str = time.ctime(current_timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前时间戳:&quot;</span>, current_timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地时间 (ctime):&quot;</span>, current_time_str)</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>time.ctime(secs)</code> 等效于 <code>time.asctime(time.localtime(secs))</code>：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">secs = <span class="number">1672531200</span></span><br><span class="line"><span class="built_in">print</span>(time.ctime(secs))</span><br><span class="line"><span class="built_in">print</span>(time.asctime(time.localtime(secs)))  <span class="comment"># 两者输出相同</span></span><br></pre></td></tr></table></figure>
+</details>
+
+
+
+<h3 id="5-time-gmtime-secs-获取-UTC-时间元组"><a href="#5-time-gmtime-secs-获取-UTC-时间元组" class="headerlink" title="5. time.gmtime([secs]) - 获取 UTC 时间元组"></a>5. <code>time.gmtime([secs])</code> - 获取 UTC 时间元组</h3><details>
+<summary><b>点击查看：Python time gmtime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.gmtime()</code> 函数用于**将一个时间戳（自 1970 年 1 月 1 日 00:00:00 UTC 纪元以来经过的浮点秒数）转换为格林威治标准时间 (GMT&#x2F;UTC) 下的时间元组 <code>struct_time</code>**。这个时间元组中的 <code>tm_isdst</code> 字段始终为 0，因为 UTC 不实行夏令时。</p>
+<p><strong>语法</strong><br><code>gmtime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.gmtime([secs])</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>secs</code> (可选) – 一个浮点数，表示自 1970 纪元以来的秒数。如果未提供 <code>secs</code> 或为 <code>None</code>，则使用当前时间戳 <code>time.time()</code>。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个 <code>struct_time</code> 对象（一种命名元组），包含 9 个元素：<code>tm_year</code>, <code>tm_mon</code>, <code>tm_mday</code>, <code>tm_hour</code>, <code>tm_min</code>, <code>tm_sec</code>, <code>tm_wday</code>, <code>tm_yday</code>, <code>tm_isdst</code>。</li>
+</ul>
+<p><strong><code>struct_time</code> 对象的字段说明：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">索引</th>
+<th align="left">属性名</th>
+<th align="left">描述</th>
+<th align="left">取值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">0</td>
+<td align="left">tm_year</td>
+<td align="left">年份</td>
+<td align="left">例如：2024</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">tm_mon</td>
+<td align="left">月份</td>
+<td align="left">1-12</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">tm_mday</td>
+<td align="left">日</td>
+<td align="left">1-31</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">tm_hour</td>
+<td align="left">小时</td>
+<td align="left">0-23</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">tm_min</td>
+<td align="left">分钟</td>
+<td align="left">0-59</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">tm_sec</td>
+<td align="left">秒</td>
+<td align="left">0-61 (60&#x2F;61 是闰秒)</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">tm_wday</td>
+<td align="left">星期几 (0&#x3D;星期一, …, 6&#x3D;星期日)</td>
+<td align="left">0-6</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">tm_yday</td>
+<td align="left">一年中的第几天</td>
+<td align="left">1-366</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">tm_isdst</td>
+<td align="left">是否为夏令时 (1&#x3D;是, 0&#x3D;否, -1&#x3D;未知)</td>
+<td align="left">-1, 0, 1</td>
+</tr>
+</tbody></table>
+<p><strong>实例</strong><br>以下实例展示了 <code>gmtime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：不提供参数，获取当前 UTC 时间元组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">utc_time = time.gmtime()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前 UTC 时间元组:&quot;</span>, utc_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前 UTC 年份:&quot;</span>, utc_time.tm_year)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前 UTC 小时:&quot;</span>, utc_time.tm_hour)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;tm_isdst (UTC 始终为 0):&quot;</span>, utc_time.tm_isdst)</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当前 UTC 时间元组: time.struct_time(tm_year=2024, tm_mon=6, tm_mday=12, tm_hour=6, tm_min=30, tm_sec=45, tm_wday=2, tm_yday=164, tm_isdst=0)</span><br><span class="line">当前 UTC 年份: 2024</span><br><span class="line">当前 UTC 小时: 6</span><br><span class="line">tm_isdst (UTC 始终为 0): 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：提供特定时间戳（例如 epoch 时间 0）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">epoch_time = <span class="number">0</span>  <span class="comment"># 1970-01-01 00:00:00 UTC</span></span><br><span class="line">epoch_struct_time = time.gmtime(epoch_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Epoch 时间 (UTC) 的 struct_time:&quot;</span>, epoch_struct_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;格式化输出 Epoch UTC 时间: %d-%02d-%02d %02d:%02d:%02d&quot;</span> % (</span><br><span class="line">    epoch_struct_time.tm_year, epoch_struct_time.tm_mon, epoch_struct_time.tm_mday,</span><br><span class="line">    epoch_struct_time.tm_hour, epoch_struct_time.tm_min, epoch_struct_time.tm_sec))</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Epoch 时间 (UTC) 的 struct_time: time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=1, tm_isdst=0)</span><br><span class="line">格式化输出 Epoch UTC 时间: 1970-01-01 00:00:00</span><br></pre></td></tr></table></figure>
+</details>
+
+<h3 id="6-time-localtime-secs-获取本地时间元组"><a href="#6-time-localtime-secs-获取本地时间元组" class="headerlink" title="6. time.localtime([secs]) - 获取本地时间元组"></a>6. <code>time.localtime([secs])</code> - 获取本地时间元组</h3><details>
+<summary><b>点击查看：Python time localtime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.localtime()</code> 函数用于**将一个时间戳（自 1970 年 1 月 1 日 00:00:00 UTC 纪元以来经过的浮点秒数）转换为当地时间（系统设置的时区）下的时间元组 <code>struct_time</code>**。这个时间元组中的 <code>tm_isdst</code> 字段会根据当地是否处于夏令时而取值 0（不是）或 1（是），或者 -1（未知，通常不会）。</p>
+<p><strong>语法</strong><br><code>localtime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.localtime([secs])</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>secs</code> (可选) – 一个浮点数，表示自 1970 纪元以来的秒数。如果未提供 <code>secs</code> 或为 <code>None</code>，则使用当前时间戳 <code>time.time()</code>。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个 <code>struct_time</code> 对象（一种命名元组），包含的字段与 <code>gmtime()</code> 返回的相同，具体含义参见 <code>gmtime()</code> 的说明。其中 <code>tm_isdst</code> 可取 0 或 1，取决于当地当时是否是夏令时。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>localtime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：不提供参数，获取当前本地时间元组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">local_time = time.localtime()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地时间元组:&quot;</span>, local_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地年份:&quot;</span>, local_time.tm_year)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地小时:&quot;</span>, local_time.tm_hour)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;tm_isdst (是否夏令时):&quot;</span>, local_time.tm_isdst)  <span class="comment"># 0 表示不是，1 表示是</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例，假设在中国时区，非夏令时）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">当前本地时间元组: time.struct_time(tm_year=2024, tm_mon=6, tm_mday=12, tm_hour=14, tm_min=45, tm_sec=30, tm_wday=2, tm_yday=164, tm_isdst=0)</span><br><span class="line">当前本地年份: 2024</span><br><span class="line">当前本地小时: 14</span><br><span class="line">tm_isdst (是否夏令时): 0</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：提供特定时间戳（例如 epoch 时间 0）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">epoch_time = <span class="number">0</span>  <span class="comment"># 1970-01-01 00:00:00 UTC</span></span><br><span class="line">local_epoch_struct_time = time.localtime(epoch_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Epoch 时间 (本地时间) 的 struct_time:&quot;</span>, local_epoch_struct_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;格式化输出 Epoch 本地时间: %d-%02d-%02d %02d:%02d:%02d&quot;</span> % (</span><br><span class="line">    local_epoch_struct_time.tm_year, local_epoch_struct_time.tm_mon, local_epoch_struct_time.tm_mday,</span><br><span class="line">    local_epoch_struct_time.tm_hour, local_epoch_struct_time.tm_min, local_epoch_struct_time.tm_sec))</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（例如，在中国时区 UTC+8）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Epoch 时间 (本地时间) 的 struct_time: time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=8, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=1, tm_isdst=0)</span><br><span class="line">格式化输出 Epoch 本地时间: 1970-01-01 08:00:00</span><br></pre></td></tr></table></figure>
+<p>（因为 UTC 时间 0 点，对应中国 UTC+8 时间是早上 8 点）</p>
+</details>
+
+<h3 id="7-time-mktime-tupletime-将时间元组转换为时间戳"><a href="#7-time-mktime-tupletime-将时间元组转换为时间戳" class="headerlink" title="7. time.mktime(tupletime) - 将时间元组转换为时间戳"></a>7. <code>time.mktime(tupletime)</code> - 将时间元组转换为时间戳</h3><details>
+<summary><b>点击查看：Python time mktime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.mktime()</code> 函数用于<strong>接受一个表示本地时间的时间元组 <code>struct_time</code>（或 9 个元素的元组），并将其转换为自 1970 年 1 月 1 日 00:00:00 UTC 纪元以来经过的浮点秒数（时间戳）</strong>。它可以看作是 <code>time.localtime()</code> 的逆函数。</p>
+<p><strong>语法</strong><br><code>mktime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.mktime(tupletime)</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>tupletime</code> – 一个 <code>struct_time</code> 对象或者一个包含 9 个整数元素的元组，其结构必须与 <code>localtime()</code> 返回的一致：<code>(tm_year, tm_mon, tm_mday, tm_hour, tm_min, tm_sec, tm_wday, tm_yday, tm_isdst)</code>。其中 <code>tm_wday</code> 和 <code>tm_yday</code> 会被忽略，因为可以从其他字段计算得出。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个浮点数，表示自 1970 纪元以来的秒数（时间戳）。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>mktime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：将 <code>localtime()</code> 返回的时间元组转换回时间戳</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前本地时间元组</span></span><br><span class="line">local_time = time.localtime()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地时间元组:&quot;</span>, local_time)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将时间元组转换为时间戳</span></span><br><span class="line">timestamp = time.mktime(local_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;转换回的时间戳:&quot;</span>, timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;与当前时间戳对比:&quot;</span>, time.time())  <span class="comment"># 应该非常接近或相同</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当前本地时间元组: time.struct_time(tm_year=2024, tm_mon=6, tm_mday=12, tm_hour=15, tm_min=5, tm_sec=20, tm_wday=2, tm_yday=164, tm_isdst=0)</span><br><span class="line">转换回的时间戳: 1718163920.0</span><br><span class="line">与当前时间戳对比: 1718163920.123456</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：将自定义的本地时间元组转换为时间戳</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个本地时间元组 (年, 月, 日, 时, 分, 秒, 星期几(忽略), 一年中第几天(忽略), 是否夏令时)</span></span><br><span class="line"><span class="comment"># 例如：2023年10月1日 10:30:00，非夏令时</span></span><br><span class="line">local_tuple = (<span class="number">2023</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="number">6</span>, <span class="number">274</span>, <span class="number">0</span>)  <span class="comment"># tm_wday=6 (周日), tm_yday=274 (10月1日)</span></span><br><span class="line">timestamp = time.mktime(local_tuple)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;2023-10-01 10:30:00 的时间戳为:&quot;</span>, timestamp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 验证：将时间戳转换回本地时间</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;验证转换:&quot;</span>, time.localtime(timestamp))</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2023-10-01 10:30:00 的时间戳为: 1696108200.0</span><br><span class="line">验证转换: time.struct_time(tm_year=2023, tm_mon=10, tm_mday=1, tm_hour=10, tm_min=30, tm_sec=0, tm_wday=6, tm_yday=274, tm_isdst=0)</span><br></pre></td></tr></table></figure>
+
+<p><strong>一篇笔记：<code>mktime()</code> 与时区</strong></p>
+<p><code>mktime()</code> <strong>输入的时间元组被解释为本地时间（带时区信息）</strong>，它会将这个本地时间转换为对应的 UTC 时间戳（不带时区，是一个绝对值）。</p>
+<p><strong>示例：</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在中国时区 (UTC+8)，本地时间 1970-01-01 08:00:00 对应 UTC 时间 1970-01-01 00:00:00</span></span><br><span class="line">a = (<span class="number">1970</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">8</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">0</span>)  <span class="comment"># tm_isdst=0 (非夏令时)</span></span><br><span class="line"><span class="built_in">print</span>(time.mktime(a))  <span class="comment"># 输出：0.0  (正确，对应 epoch 时间)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># time.gmtime(0) 返回的是 UTC 时间 1970-01-01 00:00:00 的 struct_time</span></span><br><span class="line"><span class="built_in">print</span>(time.gmtime(<span class="number">0</span>))</span><br><span class="line"><span class="comment"># 输出：time.struct_time(tm_year=1970, tm_mon=1, tm_mday=1, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=3, tm_yday=1, tm_isdst=0)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果直接将 gmtime(0) 的结果（UTC时间）作为 mktime 的输入，mktime 会把它当成本地时间。</span></span><br><span class="line"><span class="comment"># 在中国时区 (UTC+8)，这相当于本地时间 1970-01-01 00:00:00，对应的 UTC 时间是 1969-12-31 16:00:00，时间戳为 -28800.0 秒</span></span><br><span class="line">b = time.gmtime(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(time.mktime(b))  <span class="comment"># 在中国时区输出：-28800.0 (因为 00:00:00 UTC+8 比 00:00:00 UTC 早 8 小时，即 8*3600=28800 秒)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>结论：</strong></p>
+<ul>
+<li><code>time.mktime(tupletime)</code> 中的 <code>tupletime</code> 必须是<strong>本地时间</strong>的表示。</li>
+<li>如果有一个 UTC 时间的 <code>struct_time</code>（如 <code>gmtime()</code> 返回的），想将其转换为时间戳，应该先用 <code>calendar.timegm(utc_tuple)</code> (需要导入 <code>calendar</code> 模块)，而不是 <code>time.mktime()</code>。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"></span><br><span class="line">utc_tuple = time.gmtime(<span class="number">0</span>)  <span class="comment"># UTC 时间元组</span></span><br><span class="line">timestamp = calendar.timegm(utc_tuple)</span><br><span class="line"><span class="built_in">print</span>(timestamp)  <span class="comment"># 输出：0.0 (正确)</span></span><br></pre></td></tr></table></figure>
+</details></li>
+</ul>
+<h3 id="8-time-sleep-secs-程序休眠"><a href="#8-time-sleep-secs-程序休眠" class="headerlink" title="8. time.sleep(secs) - 程序休眠"></a>8. <code>time.sleep(secs)</code> - 程序休眠</h3><details>
+<summary><b>点击查看：Python time sleep()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.sleep()</code> 函数用于<strong>暂停当前线程的执行，使其休眠指定的秒数</strong>。这对于需要程序等待一段时间后再继续执行的场景非常有用。</p>
+<p><strong>语法</strong><br><code>sleep()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.sleep(secs)</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>secs</code> – 一个浮点数，表示要休眠的秒数。可以是小数，例如 <code>0.5</code> 表示休眠 500 毫秒。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>该函数没有返回值（返回 <code>None</code>）。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>sleep()</code> 函数的使用方法：</p>
+<p><strong>实例 1：基本休眠</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;程序开始执行...&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 休眠 2 秒</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;将休眠 2 秒...&quot;</span>)</span><br><span class="line">time.sleep(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;休眠结束，程序继续执行！&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">程序开始执行...</span><br><span class="line">将休眠 2 秒...</span><br><span class="line">(此处暂停 2 秒)</span><br><span class="line">休眠结束，程序继续执行！</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：休眠小数秒</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start = time.perf_counter()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 休眠 1.5 秒</span></span><br><span class="line">time.sleep(<span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">end = time.perf_counter()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;实际休眠时间: <span class="subst">&#123;end - start:<span class="number">.4</span>f&#125;</span> 秒&quot;</span>)  <span class="comment"># 应该接近 1.5 秒</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">实际休眠时间: 1.5012 秒</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>sleep()</code> 的精度可能受到系统计时器和调度程序的影响，实际休眠时间可能会比请求的时间稍长一些。</li>
+<li>在休眠期间，线程不会消耗 CPU 时间（或者说消耗很少）。</li>
+<li><code>sleep(0)</code> 会导致线程放弃当前的时间</details></li>
+</ul>
+<h3 id="9-time-strftime-fmt-tupletime-格式化时间元组为字符串"><a href="#9-time-strftime-fmt-tupletime-格式化时间元组为字符串" class="headerlink" title="9. time.strftime(fmt[, tupletime]) - 格式化时间元组为字符串"></a>9. <code>time.strftime(fmt[, tupletime])</code> - 格式化时间元组为字符串</h3><details>
+<summary><b>点击查看：Python time strftime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.strftime()</code> 函数用于<strong>接收一个时间元组（<code>struct_time</code> 对象或 9 元素元组），并根据指定的格式字符串 <code>fmt</code>，将其转换为一个可读性强的字符串表示</strong>。如果未提供 <code>tupletime</code> 参数，则默认使用当前的本地时间 <code>time.localtime()</code>。</p>
+<p><strong>语法</strong><br><code>strftime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.strftime(fmt[, tupletime])</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>fmt</code> – 格式字符串，由各种格式化指令组成，用于指定输出字符串的格式。</li>
+<li><code>tupletime</code> (可选) – 一个 <code>struct_time</code> 对象或者一个 9 元素的时间元组。如果不提供，则使用 <code>time.localtime()</code> 的结果。</li>
+</ul>
+<p><strong>常用格式化指令（<code>fmt</code> 中可用）：</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">指令</th>
+<th align="left">描述</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>%Y</code></td>
+<td align="left">四位数的年份</td>
+<td align="left">2024</td>
+</tr>
+<tr>
+<td align="left"><code>%y</code></td>
+<td align="left">两位数的年份（00-99）</td>
+<td align="left">24</td>
+</tr>
+<tr>
+<td align="left"><code>%m</code></td>
+<td align="left">两位数的月份（01-12）</td>
+<td align="left">06</td>
+</tr>
+<tr>
+<td align="left"><code>%d</code></td>
+<td align="left">两位数的日（01-31）</td>
+<td align="left">12</td>
+</tr>
+<tr>
+<td align="left"><code>%H</code></td>
+<td align="left">24小时制的小时（00-23）</td>
+<td align="left">14</td>
+</tr>
+<tr>
+<td align="left"><code>%I</code></td>
+<td align="left">12小时制的小时（01-12）</td>
+<td align="left">02</td>
+</tr>
+<tr>
+<td align="left"><code>%M</code></td>
+<td align="left">两位数的分钟（00-59）</td>
+<td align="left">30</td>
+</tr>
+<tr>
+<td align="left"><code>%S</code></td>
+<td align="left">两位数的秒（00-59）</td>
+<td align="left">45</td>
+</tr>
+<tr>
+<td align="left"><code>%a</code></td>
+<td align="left">本地简化星期名称</td>
+<td align="left">Wed</td>
+</tr>
+<tr>
+<td align="left"><code>%A</code></td>
+<td align="left">本地完整星期名称</td>
+<td align="left">Wednesday</td>
+</tr>
+<tr>
+<td align="left"><code>%b</code></td>
+<td align="left">本地简化月份名称</td>
+<td align="left">Jun</td>
+</tr>
+<tr>
+<td align="left"><code>%B</code></td>
+<td align="left">本地完整月份名称</td>
+<td align="left">June</td>
+</tr>
+<tr>
+<td align="left"><code>%p</code></td>
+<td align="left">本地 AM 或 PM 的等价符</td>
+<td align="left">PM</td>
+</tr>
+<tr>
+<td align="left"><code>%j</code></td>
+<td align="left">一年中的第几天（001-366）</td>
+<td align="left">164</td>
+</tr>
+<tr>
+<td align="left"><code>%U</code></td>
+<td align="left">一年中的第几周（00-53），以周日为一周的第一天</td>
+<td align="left">24</td>
+</tr>
+<tr>
+<td align="left"><code>%W</code></td>
+<td align="left">一年中的第几周（00-53），以周一为一周的第一天</td>
+<td align="left">24</td>
+</tr>
+<tr>
+<td align="left"><code>%c</code></td>
+<td align="left">本地相应的日期和时间表示</td>
+<td align="left">Wed Jun 12 14:30:45 2024</td>
+</tr>
+<tr>
+<td align="left"><code>%x</code></td>
+<td align="left">本地相应的日期表示</td>
+<td align="left">06&#x2F;12&#x2F;24</td>
+</tr>
+<tr>
+<td align="left"><code>%X</code></td>
+<td align="left">本地相应的时间表示</td>
+<td align="left">14:30:45</td>
+</tr>
+<tr>
+<td align="left"><code>%%</code></td>
+<td align="left">百分号本身</td>
+<td align="left">%</td>
+</tr>
+</tbody></table>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个字符串，它是根据 <code>fmt</code> 格式字符串和 <code>tupletime</code> 时间元组生成的。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>strftime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：使用当前本地时间，格式化输出各种日期时间字符串</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前本地时间元组</span></span><br><span class="line">local_time = time.localtime()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化输出：年-月-日 时:分:秒</span></span><br><span class="line"><span class="built_in">print</span>(time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, local_time))  <span class="comment"># 输出：2024-06-12 14:30:45</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化输出：月/日/年 上/下午 时:分</span></span><br><span class="line"><span class="built_in">print</span>(time.strftime(<span class="string">&quot;%m/%d/%y %p %I:%M&quot;</span>, local_time))  <span class="comment"># 输出：06/12/24 PM 02:30</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化输出：完整的星期几，完整的月份，日，年</span></span><br><span class="line"><span class="built_in">print</span>(time.strftime(<span class="string">&quot;%A, %B %d, %Y&quot;</span>, local_time))  <span class="comment"># 输出：Wednesday, June 12, 2024</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 不提供 tupletime，默认使用当前本地时间</span></span><br><span class="line"><span class="built_in">print</span>(time.strftime(<span class="string">&quot;今天是今年的第 %j 天&quot;</span>))  <span class="comment"># 输出：今天是今年的第 164 天</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：格式化一个指定的时间元组</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个时间元组 (2023年10月1日 10:15:30)</span></span><br><span class="line">custom_time = (<span class="number">2023</span>, <span class="number">10</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">30</span>, <span class="number">6</span>, <span class="number">274</span>, <span class="number">0</span>)  <span class="comment"># tm_wday=6 (周日), tm_yday=274, tm_isdst=0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化输出</span></span><br><span class="line"><span class="built_in">print</span>(time.strftime(<span class="string">&quot;自定义时间: %Y年%m月%d日 %H时%M分%S秒&quot;</span>, custom_time))</span><br><span class="line"><span class="comment"># 输出：自定义时间: 2023年10月01日 10时15分30秒</span></span><br></pre></td></tr></table></figure>
+</details>
+
+<h3 id="10-time-strptime-str-fmt-a-b-d-H-M-S-Y-解析字符串为时间元组"><a href="#10-time-strptime-str-fmt-a-b-d-H-M-S-Y-解析字符串为时间元组" class="headerlink" title="10. time.strptime(str, fmt=&#39;%a %b %d %H:%M:%S %Y&#39;) - 解析字符串为时间元组"></a>10. <code>time.strptime(str, fmt=&#39;%a %b %d %H:%M:%S %Y&#39;)</code> - 解析字符串为时间元组</h3><details>
+<summary><b>点击查看：Python time strptime()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.strptime()</code> 函数用于**根据指定的格式字符串 <code>fmt</code>，解析一个时间字符串 <code>str</code>，并返回对应的时间元组 <code>struct_time</code>**。它是 <code>time.strftime()</code> 的逆操作。</p>
+<p><strong>语法</strong><br><code>strptime()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.strptime(<span class="built_in">str</span>, fmt=<span class="string">&#x27;%a %b %d %H:%M:%S %Y&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li><code>str</code> – 要解析的时间字符串。</li>
+<li><code>fmt</code> (可选) – 格式化字符串，用于指定 <code>str</code> 的格式。如果未提供，默认格式为 <code>&#39;%a %b %d %H:%M:%S %Y&#39;</code>（例如：<code>&#39;Wed Jun 12 14:30:45 2024&#39;</code>）。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个 <code>struct_time</code> 对象。</li>
+</ul>
+<p><strong>常用格式化指令（与 <code>strftime()</code> 中的指令对应）：</strong><br>同 <code>strftime()</code>，例如 <code>%Y</code>, <code>%m</code>, <code>%d</code>, <code>%H</code>, <code>%M</code>, <code>%S</code> 等。</p>
+<p><strong>实例</strong><br>以下实例展示了 <code>strptime()</code> 函数的使用方法：</p>
+<p><strong>实例 1：使用默认格式解析字符串</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">time_str = <span class="string">&quot;Wed Jun 12 14:30:45 2024&quot;</span></span><br><span class="line"><span class="comment"># 使用默认 fmt=&#x27;%a %b %d %H:%M:%S %Y&#x27; 解析</span></span><br><span class="line">struct_time = time.strptime(time_str)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;解析结果 struct_time:&quot;</span>, struct_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;年份:&quot;</span>, struct_time.tm_year)  <span class="comment"># 输出：2024</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">解析结果 struct_time: time.struct_time(tm_year=2024, tm_mon=6, tm_mday=12, tm_hour=14, tm_min=30, tm_sec=45, tm_wday=2, tm_yday=164, tm_isdst=-1)</span><br><span class="line">年份: 2024</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：使用自定义格式解析字符串</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 日期字符串和对应的格式</span></span><br><span class="line">date_str1 = <span class="string">&quot;2024-06-12&quot;</span></span><br><span class="line">fmt1 = <span class="string">&quot;%Y-%m-%d&quot;</span></span><br><span class="line">struct_time1 = time.strptime(date_str1, fmt1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;解析 &#x27;<span class="subst">&#123;date_str1&#125;</span>&#x27; 结果:&quot;</span>, struct_time1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;年: <span class="subst">&#123;struct_time1.tm_year&#125;</span>, 月: <span class="subst">&#123;struct_time1.tm_mon&#125;</span>, 日: <span class="subst">&#123;struct_time1.tm_mday&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line">date_str2 = <span class="string">&quot;06/12/24 02:30:45 PM&quot;</span></span><br><span class="line">fmt2 = <span class="string">&quot;%m/%d/%y %I:%M:%S %p&quot;</span></span><br><span class="line">struct_time2 = time.strptime(date_str2, fmt2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;\n解析 &#x27;<span class="subst">&#123;date_str2&#125;</span>&#x27; 结果:&quot;</span>, struct_time2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;小时: <span class="subst">&#123;struct_time2.tm_hour&#125;</span> (24小时制)&quot;</span>)  <span class="comment"># 注意 %p 会影响 %I 的解析，转为 24小时制</span></span><br></pre></td></tr></table></figure>
+<p><strong>运行结果：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">解析 &#x27;2024-06-12&#x27; 结果: time.struct_time(tm_year=2024, tm_mon=6, tm_mday=12, tm_hour=0, tm_min=0, tm_sec=0, tm_wday=2, tm_yday=164, tm_isdst=-1)</span><br><span class="line">年: 2024, 月: 6, 日: 12</span><br><span class="line"></span><br><span class="line">解析 &#x27;06/12/24 02:30:45 PM&#x27; 结果: time.struct_time(tm_year=2024, tm_mon=6, tm_mday=12, tm_hour=14, tm_min=30, tm_sec=45, tm_wday=2, tm_yday=164, tm_isdst=-1)</span><br><span class="line">小时: 14 (24小时制)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><code>str</code> 和 <code>fmt</code> 的格式必须严格匹配，否则会抛出 <code>ValueError</code>。</li>
+<li>如果解析的字符串中没有包含足够的信息（如只给了日期没有时间），则时间部分会被设为 0。</li>
+<li><code>tm_isdst</code> 字段在 <code>strptime()</code> 解析时通常被设为 <code>-1</code>（表示未知），除非 <code>fmt</code> 中包含了相关信息（但通常不直接提供）。</details></li>
+</ul>
+<h3 id="11-time-time-获取当前时间戳"><a href="#11-time-time-获取当前时间戳" class="headerlink" title="11. time.time() - 获取当前时间戳"></a>11. <code>time.time()</code> - 获取当前时间戳</h3><details>
+<summary><b>点击查看：Python time time()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.time()</code> 函数用于<strong>返回当前时间的时间戳，即自 1970 年 1 月 1 日 00:00:00 UTC 纪元以来经过的浮点秒数</strong>。这个时间戳是一个不带时区信息的绝对值，是很多时间函数的基础。</p>
+<p><strong>语法</strong><br><code>time()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.time()</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li>NA（无参数）。</li>
+</ul>
+<p><strong>返回值</strong></p>
+<ul>
+<li>返回一个浮点数，表示自 1970 纪元以来的秒数，小数部分表示微秒（精度取决于系统）。</li>
+</ul>
+<p><strong>实例</strong><br>以下实例展示了 <code>time()</code> 函数的使用方法：</p>
+<p><strong>实例 1：获取当前时间戳</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">current_timestamp = time.time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前时间戳:&quot;</span>, current_timestamp)</span><br><span class="line"><span class="comment"># 输出示例：当前时间戳: 1718170234.567890</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 2：计算代码执行时间（使用 <code>time()</code>）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start_time = time.time()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟一段耗时操作</span></span><br><span class="line">total = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">1000000</span>):</span><br><span class="line">    total += i</span><br><span class="line"></span><br><span class="line">end_time = time.time()</span><br><span class="line"></span><br><span class="line">elapsed_time = end_time - start_time</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;这段代码执行了 <span class="subst">&#123;elapsed_time:<span class="number">.6</span>f&#125;</span> 秒&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;计算结果: <span class="subst">&#123;total&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这段代码执行了 0.054321 秒</span><br><span class="line">计算结果: 499999500000</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例 3：将时间戳转换为本地时间和 UTC 时间</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">timestamp = time.time()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前时间戳:&quot;</span>, timestamp)</span><br><span class="line"></span><br><span class="line">local_time = time.localtime(timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;本地时间:&quot;</span>, time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, local_time))</span><br><span class="line"></span><br><span class="line">utc_time = time.gmtime(timestamp)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;UTC 时间:&quot;</span>, time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, utc_time))</span><br></pre></td></tr></table></figure>
+<p><strong>运行结果（示例，假设在中国时区 UTC+8）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当前时间戳: 1718170500.123456</span><br><span class="line">本地时间: 2024-06-12 16:15:00</span><br><span class="line">UTC 时间: 2024-06-12 08:15:00</span><br></pre></td></tr></table></figure>
+</details>
+
+<h3 id="12-time-tzset-根据环境变量-TZ-重新初始化时间设置"><a href="#12-time-tzset-根据环境变量-TZ-重新初始化时间设置" class="headerlink" title="12. time.tzset() - 根据环境变量 TZ 重新初始化时间设置"></a>12. <code>time.tzset()</code> - 根据环境变量 TZ 重新初始化时间设置</h3><details>
+<summary><b>点击查看：Python time tzset()方法</b></summary>
+
+<p><strong>描述</strong><br>Python <code>time.tzset()</code> 函数用于<strong>根据环境变量 <code>TZ</code> 的值重新初始化 Python 的时间相关设置</strong>。这个函数主要用于 Unix&#x2F;Linux 系统，Windows 系统对此函数的支持有限或不支持。</p>
+<p>环境变量 <code>TZ</code> 的设置会影响 <code>time.localtime()</code>, <code>time.strftime()</code>, <code>time.mktime()</code> 等函数的行为，特别是涉及本地时间和时区转换的部分。</p>
+<p><strong>语法</strong><br><code>tzset()</code> 方法语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">time.tzset()</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong></p>
+<ul>
+<li>NA（无参数）。但它依赖于环境变量 <code>TZ</code> 的设置。</li>
+</ul>
+<p><strong>环境变量 <code>TZ</code> 的格式（Unix 系统）：</strong><br>通常格式为：<code>&#39;EST5EDT4,M3.2.0/2:00:00,M11.1.0/2:00:00&#39;</code><br>其中包含时区名称、与 UTC 的偏移、夏令时开始和结束规则等。更简单的格式可以直接指定时区名称（如果系统支持），如 <code>&#39;UTC&#39;</code>, <code>&#39;Asia/Shanghai&#39;</code>, <code>&#39;America/New_York&#39;</code>。</p>
+<p><strong>返回值</strong></p>
+<ul>
+<li>该函数没有返回值（返回 <code>None</code>）。</li>
+</ul>
+<p><strong>实例（Unix&#x2F;Linux 系统）</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存原始 TZ 环境变量，以便之后恢复</span></span><br><span class="line">original_tz = os.environ.get(<span class="string">&#x27;TZ&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 设置 TZ 为 UTC</span></span><br><span class="line">os.environ[<span class="string">&#x27;TZ&#x27;</span>] = <span class="string">&#x27;UTC&#x27;</span></span><br><span class="line">time.tzset()  <span class="comment"># 应用新的 TZ 设置</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;设置 TZ=UTC 后:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;本地时间 (应与 UTC 相同):&quot;</span>, time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;time.timezone (UTC 无偏移):&quot;</span>, time.timezone)  <span class="comment"># 输出：0</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;time.altzone (UTC 无夏令时):&quot;</span>, time.altzone)    <span class="comment"># 输出：0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 设置 TZ 为 Asia/Shanghai (中国标准时间，UTC+8)</span></span><br><span class="line">os.environ[<span class="string">&#x27;TZ&#x27;</span>] = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">time.tzset()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n设置 TZ=Asia/Shanghai 后:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;本地时间 (中国时间):&quot;</span>, time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;time.timezone (UTC+8 表示为 -28800 秒):&quot;</span>, time.timezone)  <span class="comment"># 输出：-28800 (因为 timezone 是西为正，东为负)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 恢复原始 TZ 设置</span></span><br><span class="line"><span class="keyword">if</span> original_tz <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    os.environ[<span class="string">&#x27;TZ&#x27;</span>] = original_tz</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">del</span> os.environ[<span class="string">&#x27;TZ&#x27;</span>]</span><br><span class="line">time.tzset()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n恢复原始 TZ 后:&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;本地时间 (系统默认):&quot;</span>, time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>Windows 兼容性：</strong> <code>time.tzset()</code> 在 Windows 系统上通常不可用或效果有限。Python 文档指出此函数主要用于 Unix。</li>
+<li><strong>权限：</strong> 修改环境变量可能需要相应的权限。</li>
+<li><strong>谨慎使用：</strong> 动态修改 <code>TZ</code> 环境变量和调用 <code>tzset()</code> 可能会影响程序中其他依赖于本地时间的部分，使用时需谨慎。对于需要处理多个时区的复杂应用，推荐使用 <code>pytz</code> 库或 Python 3.9+ 引入的标准库 <code>zoneinfo</code>。</details></li>
+</ul>
+<hr>
+<h2 id="time-模块的时区属性"><a href="#time-模块的时区属性" class="headerlink" title="time 模块的时区属性"></a><code>time</code> 模块的时区属性</h2><p>除了我们前面学过的获取时间戳和时间元组的函数外，<code>time</code> 模块还提供了一些有用的**属性 (Attribute)**，帮助我们了解当前系统的时区设置。</p>
+<h3 id="time-timezone"><a href="#time-timezone" class="headerlink" title="time.timezone"></a><code>time.timezone</code></h3><p><code>time.timezone</code> 是一个<strong>整数属性</strong>，它表示：</p>
+<p><strong>当地时区（在未启用夏令时的情况下）与格林威治标准时间 (GMT，也就是 UTC) 的</strong>偏移秒数<strong>。</strong></p>
+<ul>
+<li>如果这个值是 <strong>正数</strong>，表示当地时间比 UTC 时间<strong>晚</strong>（比如美洲的一些时区）。</li>
+<li>如果这个值是 <strong>负数</strong>，表示当地时间比 UTC 时间<strong>早</strong>（比如大部分欧洲、亚洲、非洲国家和地区）。</li>
+<li>单位是<strong>秒</strong>。</li>
+</ul>
+<p><strong>例如</strong>：</p>
+<ul>
+<li>中国标准时间 (CST，UTC+8)，在不考虑夏令时的情况下（中国大部分地区不实行夏令时），<code>time.timezone</code> 的值就是 <code>-28800</code> 秒。因为 8小时 &#x3D; 8 * 3600秒 &#x3D; 28800秒，早于 UTC，所以是负数。</li>
+</ul>
+<h3 id="time-tzname"><a href="#time-tzname" class="headerlink" title="time.tzname"></a><code>time.tzname</code></h3><p><code>time.tzname</code> 是一个<strong>元组属性</strong>，它包含两个字符串元素，分别表示：</p>
+<ul>
+<li><strong>第一个元素</strong>：<strong>不带夏令时</strong>的本地时区名称。</li>
+<li><strong>第二个元素</strong>：<strong>带夏令时</strong>的本地时区名称（如果当地实行夏令时的话）。</li>
+</ul>
+<p>具体的名称会根据你的操作系统设置和当前是否处于夏令时而有所不同。</p>
+<p><strong>例如</strong>：</p>
+<ul>
+<li>在中国（不实行夏令时的地区），<code>time.tzname</code> 通常可能是 <code>(&#39;CST&#39;, &#39;CST&#39;)</code> 或者 <code>(&#39;Asia/Shanghai&#39;, &#39;Asia/Shanghai&#39;)</code> 等，具体取决于系统配置。</li>
+<li>在实行夏令时的地区，比如美国纽约，非夏令时可能是 <code>&#39;EST&#39;</code> (Eastern Standard Time)，夏令时可能是 <code>&#39;EDT&#39;</code> (Eastern Daylight Time)，所以 <code>time.tzname</code> 可能是 <code>(&#39;EST&#39;, &#39;EDT&#39;)</code>。</li>
+</ul>
+<p><strong>实例：查看你的时区属性</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;本地时区与UTC的偏移秒数 (未启用夏令时):&quot;</span>, time.timezone)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;本地时区名称 (不带夏令时) 和 (带夏令时):&quot;</span>, time.tzname)</span><br></pre></td></tr></table></figure>
+
+<p><strong>你可能会看到的输出</strong> (以中国上海为例，假设系统时区设置正确)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本地时区与UTC的偏移秒数 (未启用夏令时): -28800</span><br><span class="line">本地时区名称 (不带夏令时) 和 (带夏令时): (&#x27;CST&#x27;, &#x27;CST&#x27;)</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">本地时区与UTC的偏移秒数 (未启用夏令时): -28800</span><br><span class="line">本地时区名称 (不带夏令时) 和 (带夏令时): (&#x27;Asia/Shanghai&#x27;, &#x27;Asia/Shanghai&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>解释</strong>：</p>
+<ul>
+<li><code>-28800</code> 秒 &#x3D; -8 * 3600 秒，即 UTC+8。</li>
+<li><code>(&#39;CST&#39;, &#39;CST&#39;)</code> 表示中国标准时间，因为中国不使用夏令时，所以两个名称一样。<code>CST</code> 可以代表 China Standard Time。</li>
+</ul>
+<p>这些时区属性对于理解本地时间和 UTC 时间之间的转换非常有帮助，也能让我们的程序在处理时间时更加灵活和准确。</p>
+<hr>
+<h2 id="Python-calendar-模块"><a href="#Python-calendar-模块" class="headerlink" title="Python calendar 模块"></a>Python <code>calendar</code> 模块</h2><p><code>calendar</code> 模块提供了与日历相关的各种功能，例如生成年度日历、月度日历，判断闰年等。</p>
+<p>默认情况下：</p>
+<ul>
+<li><strong>星期一</strong>是每周的第一天。</li>
+<li><strong>星期天</strong>是每周的最后一天。</li>
+<li>可以通过调用 <code>calendar.setfirstweekday()</code> 函数来更改每周的起始日期。</li>
+</ul>
+<h3 id="calendar-模块内置函数"><a href="#calendar-模块内置函数" class="headerlink" title="calendar 模块内置函数"></a><code>calendar</code> 模块内置函数</h3><ol>
+<li><p><strong><code>calendar.calendar(year, w=2, l=1, c=6)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回一个多行字符串格式的 <code>year</code> 年的年历。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>year</code>：要生成日历的年份。</li>
+<li><code>w</code> (可选)：每日宽度间隔（字符数），默认值为 2。</li>
+<li><code>l</code> (可选)：每星期的行数，默认值为 1。</li>
+<li><code>c</code> (可选)：每月之间的间隔距离（字符数），默认值为 6。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：一个多行字符串，表示指定年份的年历，3 个月一行。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.firstweekday()</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回当前设置的每周起始日期。</li>
+<li><strong>返回值</strong>：一个整数。默认情况下，首次载入 <code>calendar</code> 模块时返回 <code>0</code>，即表示星期一（<code>0</code>&#x3D;星期一，<code>1</code>&#x3D;星期二, …, <code>6</code>&#x3D;星期日）。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.isleap(year)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：判断给定的年份 <code>year</code> 是否为闰年。</li>
+<li><strong>参数</strong>：<code>year</code>：要检查的年份。</li>
+<li><strong>返回值</strong>：如果是闰年则返回 <code>True</code>，否则返回 <code>False</code>。</li>
+<li><strong>实例</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"><span class="built_in">print</span>(calendar.isleap(<span class="number">2000</span>))  <span class="comment"># 输出：True</span></span><br><span class="line"><span class="built_in">print</span>(calendar.isleap(<span class="number">1900</span>))  <span class="comment"># 输出：False</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong><code>calendar.leapdays(y1, y2)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回在年份 <code>y1</code> 和 <code>y2</code>（不包含 <code>y2</code>）之间的闰年总数。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>y1</code>：起始年份（包含）。</li>
+<li><code>y2</code>：结束年份（不包含）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：一个整数，表示 <code>[y1, y2)</code> 区间内的闰年个数。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.month(year, month, w=2, l=1)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回一个多行字符串格式的 <code>year</code> 年 <code>month</code> 月的月历。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>year</code>：年份。</li>
+<li><code>month</code>：月份（1-12）。</li>
+<li><code>w</code> (可选)：每日宽度间隔（字符数），默认值为 2。</li>
+<li><code>l</code> (可选)：每星期的行数，默认值为 1。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：一个多行字符串，表示指定年月的月历，包含两行标题（月份年份和星期几缩写），一周一行。每行的长度为 <code>7 * w + 6</code>。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.monthcalendar(year, month)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回一个整数的单层嵌套列表（列表的列表）。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>year</code>：年份。</li>
+<li><code>month</code>：月份（1-12）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：每个子列表装载代表一个星期的整数。<code>year</code> 年 <code>month</code> 月之外的日期都设为 <code>0</code>；范围内的日子都由该月第几日表示，从 <code>1</code> 开始。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.monthrange(year, month)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回两个整数组成的元组。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>year</code>：年份。</li>
+<li><code>month</code>：月份（1-12）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：<ul>
+<li>第一个整数是该月的<strong>第一天是星期几的日期码</strong>（<code>0</code> 表示星期一，<code>1</code> 表示星期二，…，<code>6</code> 表示星期日）。</li>
+<li>第二个整数是该月的<strong>天数</strong>（<code>28</code> 到 <code>31</code> 之间）。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.prcal(year, w=2, l=1, c=6)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：相当于 <code>print(calendar.calendar(year, w=2, l=1, c=6))</code>。即打印 <code>year</code> 年的年历。</li>
+<li><strong>参数</strong>：与 <code>calendar.calendar()</code> 相同。</li>
+<li><strong>返回值</strong>：<code>None</code>（直接打印输出）。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.prmonth(year, month, w=2, l=1)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：相当于 <code>print(calendar.month(year, month, w=2, l=1))</code>。即打印 <code>year</code> 年 <code>month</code> 月的月历。</li>
+<li><strong>参数</strong>：与 <code>calendar.month()</code> 相同。</li>
+<li><strong>返回值</strong>：<code>None</code>（直接打印输出）。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.setfirstweekday(weekday)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：设置每周的起始日期码。</li>
+<li><strong>参数</strong>：<code>weekday</code>：一个整数，<code>0</code> 表示星期一，<code>1</code> 表示星期二， …，<code>6</code> 表示星期日。</li>
+<li><strong>返回值</strong>：<code>None</code>。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.timegm(tupletime)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：和 <code>time.gmtime()</code> 相反。接受一个 UTC 时间元组形式（<code>struct_time</code> 对象或 9 元素元组），返回该时刻的时间戳（自 1970 纪元后经过的浮点秒数）。</li>
+<li><strong>参数</strong>：<code>tupletime</code>：一个 <code>struct_time</code> 对象或者一个 9 元素的时间元组，代表一个 UTC 时间。</li>
+<li><strong>返回值</strong>：一个浮点数，表示自 1970 年 1 月 1 日 00:00:00 UTC 以来的秒数。</li>
+</ul>
+</li>
+<li><p><strong><code>calendar.weekday(year, month, day)</code></strong></p>
+<ul>
+<li><strong>描述</strong>：返回给定日期（<code>year</code> 年 <code>month</code> 月 <code>day</code> 日）是星期几的日期码。</li>
+<li><strong>参数</strong>：<ul>
+<li><code>year</code>：年份。</li>
+<li><code>month</code>：月份（1 表示一月，12 表示十二月）。</li>
+<li><code>day</code>：日（1 到当月的天数）。</li>
+</ul>
+</li>
+<li><strong>返回值</strong>：一个整数，<code>0</code> 表示星期一，<code>1</code> 表示星期二， …，<code>6</code> 表示星期日。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="其他相关模块和函数"><a href="#其他相关模块和函数" class="headerlink" title="其他相关模块和函数"></a>其他相关模块和函数</h2><p>在Python中，其他处理日期和时间的模块还有：</p>
+<ul>
+<li><strong>datetime模块</strong>: <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/datetime.html">https://docs.python.org/3/library/datetime.html</a></li>
+<li><strong>pytz模块</strong>: <a target="_blank" rel="noopener" href="https://pypi.org/project/pytz/">https://pypi.org/project/pytz/</a> (PyPI 页面，其官方文档通常链接于此或在项目仓库)</li>
+<li><strong>dateutil模块</strong>: <a target="_blank" rel="noopener" href="https://dateutil.readthedocs.io/en/stable/">https://dateutil.readthedocs.io/en/stable/</a> (Read the Docs)</li>
+</ul>
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><h3 id="练习-1：获取当前时间并打印"><a href="#练习-1：获取当前时间并打印" class="headerlink" title="练习 1：获取当前时间并打印"></a>练习 1：获取当前时间并打印</h3><p><strong>任务</strong>：使用 <code>time</code> 模块，获取当前的本地时间，并以 <code>年-月-日 时:分:秒</code> 的格式打印出来。</p>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取当前本地时间元组</span></span><br><span class="line">local_time = time.localtime()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 格式化输出</span></span><br><span class="line">formatted_time = time.strftime(<span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, local_time)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;当前本地时间:&quot;</span>, formatted_time)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h3 id="练习-2：判断闰年"><a href="#练习-2：判断闰年" class="headerlink" title="练习 2：判断闰年"></a>练习 2：判断闰年</h3><p><strong>任务</strong>：使用 <code>calendar</code> 模块，让用户输入一个年份，然后判断该年份是否是闰年。</p>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"></span><br><span class="line">year = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入一个年份: &quot;</span>))</span><br><span class="line"><span class="keyword">if</span> calendar.isleap(year):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;year&#125;</span>年是闰年。&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;year&#125;</span>年不是闰年。&quot;</span>)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h3 id="练习-3：计算两个日期之间的天数差-基础版"><a href="#练习-3：计算两个日期之间的天数差-基础版" class="headerlink" title="练习 3：计算两个日期之间的天数差 (基础版)"></a>练习 3：计算两个日期之间的天数差 (基础版)</h3><p><strong>任务</strong>：让用户输入两个日期（格式如 <code>YYYY-MM-DD</code>），计算并打印这两个日期之间相差的天数。<br>（提示：可以使用 <code>time.strptime()</code> 将字符串转为时间元组，再用 <code>time.mktime()</code> 转为时间戳，最后计算差值）</p>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">date_to_timestamp</span>(<span class="params">date_str</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;将 &#x27;YYYY-MM-DD&#x27; 格式的字符串转换为时间戳&quot;&quot;&quot;</span></span><br><span class="line">    time_tuple = time.strptime(date_str, <span class="string">&quot;%Y-%m-%d&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> time.mktime(time_tuple)</span><br><span class="line"></span><br><span class="line">date1 = <span class="built_in">input</span>(<span class="string">&quot;请输入第一个日期 (YYYY-MM-DD): &quot;</span>)</span><br><span class="line">date2 = <span class="built_in">input</span>(<span class="string">&quot;请输入第二个日期 (YYYY-MM-DD): &quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    ts1 = date_to_timestamp(date1)</span><br><span class="line">    ts2 = date_to_timestamp(date2)</span><br><span class="line">    delta_seconds = <span class="built_in">abs</span>(ts1 - ts2)</span><br><span class="line">    delta_days = delta_seconds / (<span class="number">24</span> * <span class="number">60</span> * <span class="number">60</span>)  <span class="comment"># 转换为天</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;两个日期相差 <span class="subst">&#123;<span class="built_in">int</span>(delta_days)&#125;</span> 天。&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> ValueError:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;日期格式错误，请确保输入的格式是 YYYY-MM-DD。&quot;</span>)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h3 id="练习-4：打印指定年份和月份的日历"><a href="#练习-4：打印指定年份和月份的日历" class="headerlink" title="练习 4：打印指定年份和月份的日历"></a>练习 4：打印指定年份和月份的日历</h3><p><strong>任务</strong>：让用户输入一个年份和一个月份，然后使用 <code>calendar</code> 模块打印出该月的日历。</p>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"></span><br><span class="line">year = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入年份: &quot;</span>))</span><br><span class="line">month = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入月份 (1-12): &quot;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="number">1</span> &lt;= month &lt;= <span class="number">12</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;\n<span class="subst">&#123;year&#125;</span>年<span class="subst">&#123;month&#125;</span>月的日历:&quot;</span>)</span><br><span class="line">    calendar.prmonth(year, month)  <span class="comment"># prmonth 直接打印</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;月份输入错误，请输入 1 到 12 之间的数字。&quot;</span>)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h3 id="练习-5：计算程序执行时间"><a href="#练习-5：计算程序执行时间" class="headerlink" title="练习 5：计算程序执行时间"></a>练习 5：计算程序执行时间</h3><p><strong>任务</strong>：编写一个程序，计算从 1 加到 1000000 所花费的时间，并打印出来（精确到小数点后 4 位）。<br>（提示：使用 <code>time.time()</code> 在循环前后获取时间戳）</p>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">start_time = time.time()</span><br><span class="line"></span><br><span class="line">total = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">1000001</span>):</span><br><span class="line">    total += i</span><br><span class="line"></span><br><span class="line">end_time = time.time()</span><br><span class="line"></span><br><span class="line">elapsed_time = end_time - start_time</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;从 1 加到 1000000 的结果是: <span class="subst">&#123;total&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;程序执行时间: <span class="subst">&#123;elapsed_time:<span class="number">.4</span>f&#125;</span> 秒&quot;</span>)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h3 id="练习-6：综合应用-生日倒计时-使用-time-和-calendar"><a href="#练习-6：综合应用-生日倒计时-使用-time-和-calendar" class="headerlink" title="练习 6：综合应用 - 生日倒计时 (使用 time 和 calendar)"></a>练习 6：综合应用 - 生日倒计时 (使用 <code>time</code> 和 <code>calendar</code>)</h3><p><strong>任务</strong>：</p>
+<ol>
+<li>让用户输入他的生日（格式 <code>YYYY-MM-DD</code>）。</li>
+<li>获取当前日期。</li>
+<li>计算今年的生日过了没有。</li>
+<li>如果过了，计算距离明年生日的天数；如果没过，计算距离今年生日的天数。</li>
+<li>打印结果。</li>
+</ol>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> calendar</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">days_until_birthday</span>(<span class="params">birthday_str</span>):</span><br><span class="line">    <span class="comment"># 获取当前时间元组</span></span><br><span class="line">    today = time.localtime()</span><br><span class="line">    current_year = today.tm_year</span><br><span class="line">    current_month = today.tm_mon</span><br><span class="line">    current_day = today.tm_mday</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 解析生日</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        birth_tuple = time.strptime(birthday_str, <span class="string">&quot;%Y-%m-%d&quot;</span>)</span><br><span class="line">        birth_month = birth_tuple.tm_mon</span><br><span class="line">        birth_day = birth_tuple.tm_mday</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算今年的生日</span></span><br><span class="line">        this_year_birthday = (current_year, birth_month, birth_day)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将生日转换为时间戳 (注意处理跨年)</span></span><br><span class="line">        <span class="comment"># 先尝试今年的生日</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            birth_timestamp = time.mktime(time.strptime(<span class="string">f&quot;<span class="subst">&#123;current_year&#125;</span>-<span class="subst">&#123;birth_month&#125;</span>-<span class="subst">&#123;birth_day&#125;</span>&quot;</span>, <span class="string">&quot;%Y-%m-%d&quot;</span>))</span><br><span class="line">        <span class="keyword">except</span> ValueError:</span><br><span class="line">            <span class="comment"># 处理2月29日的情况，如果今年不是闰年，则视为3月1日？或者直接算365天？</span></span><br><span class="line">            <span class="comment"># 这里简化处理，假设用户输入的生日是有效的（非2月29日或输入年份是闰年）</span></span><br><span class="line">            <span class="comment"># 更严谨的处理可以参考更复杂的日期库</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;注意：生日为2月29日，在非闰年将视为3月1日计算。&quot;</span>)</span><br><span class="line">            birth_timestamp = time.mktime(time.strptime(<span class="string">f&quot;<span class="subst">&#123;current_year&#125;</span>-03-01&quot;</span>, <span class="string">&quot;%Y-%m-%d&quot;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 当前时间戳</span></span><br><span class="line">        now_timestamp = time.time()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> birth_timestamp &gt;= now_timestamp:</span><br><span class="line">            <span class="comment"># 今年生日还没过</span></span><br><span class="line">            days_until = (birth_timestamp - now_timestamp) / (<span class="number">24</span> * <span class="number">3600</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 今年生日已过，计算明年的</span></span><br><span class="line">            next_year = current_year + <span class="number">1</span></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                birth_timestamp_next = time.mktime(time.strptime(<span class="string">f&quot;<span class="subst">&#123;next_year&#125;</span>-<span class="subst">&#123;birth_month&#125;</span>-<span class="subst">&#123;birth_day&#125;</span>&quot;</span>, <span class="string">&quot;%Y-%m-%d&quot;</span>))</span><br><span class="line">            <span class="keyword">except</span> ValueError:</span><br><span class="line">                birth_timestamp_next = time.mktime(time.strptime(<span class="string">f&quot;<span class="subst">&#123;next_year&#125;</span>-03-01&quot;</span>, <span class="string">&quot;%Y-%m-%d&quot;</span>))</span><br><span class="line">            days_until = (birth_timestamp_next - now_timestamp) / (<span class="number">24</span> * <span class="number">3600</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">int</span>(days_until)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">except</span> ValueError:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;生日格式错误，请使用 YYYY-MM-DD 格式。&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取用户生日</span></span><br><span class="line">birthday = <span class="built_in">input</span>(<span class="string">&quot;请输入你的生日 (YYYY-MM-DD): &quot;</span>)</span><br><span class="line">days = days_until_birthday(birthday)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> days <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">    <span class="keyword">if</span> days == <span class="number">0</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;今天是你的生日！生日快乐！&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;距离你的下一个生日还有 <span class="subst">&#123;days&#125;</span> 天。&quot;</span>)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<h3 id="练习-7：综合应用-日期解析与转换-使用-time-模块"><a href="#练习-7：综合应用-日期解析与转换-使用-time-模块" class="headerlink" title="练习 7：综合应用 - 日期解析与转换 (使用 time 模块)"></a>练习 7：综合应用 - 日期解析与转换 (使用 <code>time</code> 模块)</h3><p><strong>任务</strong>：</p>
+<ol>
+<li>给定一个日期字符串，例如 <code>&quot;2023/12/25&quot;</code>。</li>
+<li>将其解析为一个时间元组。</li>
+<li>然后将这个时间元组转换为另一种格式的字符串，例如 <code>&quot;December 25, 2023 (Monday)&quot;</code>。</li>
+<li>再计算并打印出这一天是当年的第几天。</li>
+</ol>
+<details>
+<summary><b>参考答案</b></summary>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定的日期字符串</span></span><br><span class="line">date_str = <span class="string">&quot;2023/12/25&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 解析日期字符串为时间元组 (原格式是 %Y/%m/%d)</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    time_tuple = time.strptime(date_str, <span class="string">&quot;%Y/%m/%d&quot;</span>)</span><br><span class="line"><span class="keyword">except</span> ValueError <span class="keyword">as</span> e:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;解析日期失败: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">    exit()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 转换为新的格式字符串 &quot;December 25, 2023 (Monday)&quot;</span></span><br><span class="line">new_format = time.strftime(<span class="string">&quot;%B %d, %Y (%A)&quot;</span>, time_tuple)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;转换后的日期:&quot;</span>, new_format)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 计算这一天是当年的第几天 (tm_yday 属性)</span></span><br><span class="line">day_of_year = time_tuple.tm_yday</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;这一天是 <span class="subst">&#123;time_tuple.tm_year&#125;</span> 年的第 <span class="subst">&#123;day_of_year&#125;</span> 天。&quot;</span>)</span><br></pre></td></tr></table></figure>
+</details>
+
+<hr>
+<p>希望这些练习能帮助你更好地理解和运用 Python 的日期和时间处理功能！慢慢来，动手实践是学习编程的最佳途径。如果遇到困难，可以回顾之前学过的内容，或者查阅官方文档，也欢迎在下方评论区交流</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://github.com/matou03">码头</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://blog.toumatou.cn/2025/10/30/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/">https://blog.toumatou.cn/2025/10/30/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://blog.toumatou.cn" target="_blank">Matou🚢</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BC%96%E7%A8%8B/">编程</a></div><div class="post-share"><div class="social-share" data-image="/img/CFB91614C14711CE1BF5E11E3DD07D85.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>投喂作者</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img_1/F9A771632876E091D5F0DEFA539DA062.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img_1/F9A771632876E091D5F0DEFA539DA062.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/10/29/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E5%AD%97%E5%85%B8/" title="Python 字典"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Python 字典</div></div><div class="info-2"><div class="info-item-1">Python 字典 (Dictionary)在上一部分，我们认识了元组，一种可以有序存放各种宝贝的固定容器。今天，我们要学习一个新的、非常非常实用的数据类型，它就像一个带有标签的智能储物柜，名字叫做 **字典 (Dictionary)**。 1. 什么是字典？现在，你有一个储物柜，柜子里有很多小格子。如果是元组，每个格子可能只有编号，比如第1个，第2个。但如果是字典，你可以给每个格子贴上一个独一无二的名字标签。比如，“我的铅笔”、“你的故事书”、“他的橡皮擦”。这样，你想找什么，直接根据标签一找就能找到，是不是方便多了？ 在 Python 中，字典就是这样一种神奇的容器：  首先，它可以存放各种各样的数据（数字、字符串、列表，甚至其他字典，几乎无所不能！）。 其次，它里面的东西是可以改变的。即我们可以随时添加、修改或删除里面的东西 最后，也是最重要的特点。里面的每一样东西都有一个对应的名字标签，我们称之为 “键 (Key)”，而这个名字标签所对应的东西，我们称之为 **值 (Value)**。  所以，字典里存的不是孤立的，而是一对一对的 键:值 (Key: Value)...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2022/01/17/BF%E7%AE%97%E6%B3%95%E4%B8%8EKMP%E7%AE%97%E6%B3%95/" title="BF算法与KMP算法"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3175F7D0E3276DAD663A4622838F4915.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-01-17</div><div class="info-item-2">BF算法与KMP算法</div></div><div class="info-2"><div class="info-item-1">我们来聊聊数据结构中两种在字符串中寻找子串的方法：暴力匹配（BF算法）和KMP算法。这两种方法都像是在玩一个“找茬”游戏，目的是在一个大字符串（我们称之为主串）中找到一个小字符串（我们称之为模式串）出现的位置。 我们先举一个例子：假设主串为 “ababcabcacbab”，模式串为...</div></div></div></a><a class="pagination-related" href="/2024/11/16/C-vector%E5%AE%B9%E5%99%A8/" title="C++ vector容器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/5E1835FEA121BA57EB34ED5FF7C38167.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-16</div><div class="info-item-2">C++ vector容器</div></div><div class="info-2"><div class="info-item-1">前言这一节内容可能会涉及到一些之前所学习的相关知识，如果你还有不明白的，可以去温习一下之前所学C++基础教程 C++ vector容器在 C++ 中，vector 是一种非常强大的数据结构，它和数组类似，但功能更灵活。它是一个可以动态调整大小的数组，不需要你手动管理内存，是 C++ 标准模板库（STL）的一部分。 如果你需要一个可以自动扩展的数组来存储数据，vector 是你的首选。  为什么用 vector 而不是数组？数组虽然可以存储元素，但有几个缺点：  固定大小：数组在创建时必须指定大小，无法动态扩展或缩小。 手动管理内存：如果需要动态数组，你必须手动分配和释放内存，容易出错。 功能有限：数组没有直接提供添加、删除、查找等功能。  而 vector 可以解决这些问题：  动态大小：vector 可以根据需要自动增长或缩小。 连续存储：vector 的元素存储在连续的内存中，因此访问速度快。 灵活接口：提供了丰富的操作方法，如添加、删除、清空等。   如何使用 vector？1. 引入头文件要使用 vector，必须包含 &lt;vector&gt;...</div></div></div></a><a class="pagination-related" href="/2024/11/16/C-%E4%BF%AE%E9%A5%B0%E7%AC%A6%E7%B1%BB%E5%9E%8B/" title="C++修饰符类型"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/D52E9CDCFE23A883719760052AE9E1FF.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-16</div><div class="info-item-2">C++修饰符类型</div></div><div class="info-2"><div class="info-item-1">前言这一节我们将学习修饰符类型的的相关知识，可能会涉及到一些C++的基本语法以及C++变量类型、C++变量作用域的相关知识，如果你还有不明白的，请到C++基本语法和C++变量类型、C++变量作用域这里温故一下 C++修饰符类型 什么是修饰符类型？修饰符是用来调整变量的存储范围和行为的关键字。例如：  变量是否能存储负数？ 变量的存储范围是更大还是更小？  C++ 提供了多个修饰符来满足不同的需求  常见修饰符 signed（有符号）  变量可以存储正数和负数。 默认情况下，整型变量（int）都是有符号的，所以int和signed int是一样的。   unsigned（无符号）  变量只能存储正数。 因为没有负数，存储范围扩大了一倍（范围从0开始）。   short（短整型）  比int的存储范围更小，通常用来节省存储空间。   long（长整型）  比int的存储范围更大，适合表示更大的数字。 C++11 增加了long...</div></div></div></a><a class="pagination-related" href="/2024/11/16/C-%E5%87%BD%E6%95%B0/" title="C++函数"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/11AE4D291AF7578117F1B4CE9AA081FD.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-16</div><div class="info-item-2">C++函数</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/2024/11/16/C-%E5%88%A4%E6%96%AD/" title="C++判断"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/5110335EC25D545126E76B9ABE157F02.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-16</div><div class="info-item-2">C++判断</div></div><div class="info-2"><div class="info-item-1">前言这一节我们将学习判断的的相关知识，可能会涉及到一些C++的基本语法以及C++变量类型、C++变量作用域、C++常量等的相关知识，如果你还有不明不白的，请到C++基本语法和C++变量类型、C++变量作用域、C++常量这里温故一下 C++判断在编程中，判断结构就像是做选择题。程序员需要设定一些问题（条件），然后告诉计算机：  如果问题的答案是肯定的（条件为真），那么计算机应该做什么（执行哪些语句）。 如果问题的答案是否定的（条件为假），那么计算机可以做什么（执行哪些语句，这部分是可选的）。  简单来说，判断结构就是让计算机根据条件来决定下一步做什么的一种方法。这就像是我们日常生活中做决定的过程：如果天气好，我们就去公园；如果天气不好，我们就待在家里。在编程中，我们用代码来实现这样的逻辑。 在 C++ 编程语言中，判断语句就是用来根据条件来决定代码如何执行的一种方式。以下是几种判断语句，用简单的方式解释它们的功能： 1. if 语句 功能： 当条件为“真”时，执行一段代码。 例子：123if (a &gt; b) &#123;    cout &lt;&lt; &quot;a 比...</div></div></div></a><a class="pagination-related" href="/2024/11/16/C-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/" title="C++变量作用域"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/574BCD77534C0B540CC0D4CFEBDF8CD1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-16</div><div class="info-item-2">C++变量作用域</div></div><div class="info-2"><div class="info-item-1">前言这一节我们将学习变量作用域的相关知识，可能会涉及到一些C++的基本语法以及C++变量类型的相关知识，如果你还有不明白的，请到C++基本语法和C++变量类型这里温故一下 C++变量作用域1. 变量的定义位置在C++中，根据变量定义的位置，变量可以分为以下几类：  局部变量：在函数或代码块中声明的变量，只能在该函数或块中使用。 形式参数：函数的参数，它是函数调用时用来接收外部传入数据的变量。 全局变量：在所有函数之外声明的变量，可以在整个程序中使用。   2. 什么是作用域？作用域是一个变量可以被访问的“范围”或“区域”。根据变量的定义位置，它的作用域可以分为以下几种： （1）局部作用域 定义位置：在函数内部声明。 特点： 只能在函数内部访问，函数外部无法使用。 每次调用函数时，局部变量都会被创建；函数结束后，局部变量会被销毁。   示例：12345void myFunction() &#123;    int x = 10; // x 是局部变量    std::cout &lt;&lt; x &lt;&lt; std::endl; &#125;// 这里无法访问...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="waline-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="card-info-avatar"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/CFB91614C14711CE1BF5E11E3DD07D85.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-status-box"><div class="author-status"><g-emoji class="g-emoji" alias="palm_tree" fallback-src="https://lskypro.acozycotage.net/LightPicture/2022/12/fe1dc0402e623096.jpg">🐟</g-emoji><span>认真摸鱼中</span></div></div></div></div><div class="author-info-name">码头</div><div class="author-info-description">一个简单的博主</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">79</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">10</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">19</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://space.bilibili.com/2002893866?spm_id_from=333.1007.0.0"><i class="fa-brands fa-bilibili"></i><span>关注我</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/matou03" target="_blank" title="Github"><i class="fa-brands fa-github"></i></a><a class="social-icon" href="https://twitter.com/Nicoversio78139" target="_blank" title="Twitter"><i class="fa-brands fa-twitter"></i></a><a class="social-icon" href="mailto:matou270321@outlook.com" target="_blank" title="Outllok"><i class="fa-solid fa-envelope"></i></a><a class="social-icon" href="https://space.bilibili.com/2002893866?spm_id_from=333.1007.0.0" target="_blank" title="B站"><i class="fa-brands fa-bilibili"></i></a><a class="social-icon" href="https://discord.com/channels/@me" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到码头的博客😄</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python-%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4"><span class="toc-number">1.</span> <span class="toc-text">Python 日期和时间</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%97%B6%E9%97%B4%E9%83%BD%E5%8E%BB%E5%93%AA%E5%84%BF%E4%BA%86%EF%BC%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1. 时间都去哪儿了？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%94%A8-Python-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 用 Python 获取当前时间戳</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Python-%E6%97%B6%E9%97%B4%E5%B7%A5%E5%85%B7%E5%8C%85-%E2%80%94%E2%80%94-time-%E6%A8%A1%E5%9D%97"><span class="toc-number">1.2.</span> <span class="toc-text">2. Python 时间工具包 —— time 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AA%E6%97%A5%E5%8E%86%E5%B7%A5%E5%85%B7%E5%8C%85-%E2%80%94%E2%80%94-calendar-%E6%A8%A1%E5%9D%97"><span class="toc-number">1.3.</span> <span class="toc-text">3. 还有一个日历工具包 —— calendar 模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84-struct-time"><span class="toc-number">1.4.</span> <span class="toc-text">2. 时间元组 (struct_time)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%BB%80%E4%B9%88%E6%98%AF%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84%EF%BC%9F"><span class="toc-number">1.4.1.</span> <span class="toc-text">2.1 什么是时间元组？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84%EF%BC%9F"><span class="toc-number">1.4.2.</span> <span class="toc-text">2.2 如何获取时间元组？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.4.3.</span> <span class="toc-text">2.3 时间元组的作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-time-%E6%A8%A1%E5%9D%97%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.5.</span> <span class="toc-text">Python time 模块内置函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-time-altzone-%E8%8E%B7%E5%8F%96%E5%A4%8F%E4%BB%A4%E6%97%B6%E5%81%8F%E7%A7%BB%E7%A7%92%E6%95%B0"><span class="toc-number">1.5.1.</span> <span class="toc-text">1. time.altzone - 获取夏令时偏移秒数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-time-asctime-tupletime-%E8%BD%AC%E6%8D%A2%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84%E4%B8%BA%E5%8F%AF%E8%AF%BB%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.2.</span> <span class="toc-text">2. time.asctime([tupletime]) - 转换时间元组为可读字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-time-clock-%E6%B5%8B%E9%87%8F-CPU-%E6%97%B6%E9%97%B4-Python-3-3-%E5%B7%B2%E5%BA%9F%E5%BC%83"><span class="toc-number">1.5.3.</span> <span class="toc-text">3. time.clock() - 测量 CPU 时间 (Python 3.3+ 已废弃)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-time-ctime-secs-%E8%BD%AC%E6%8D%A2%E6%97%B6%E9%97%B4%E6%88%B3%E4%B8%BA%E6%9C%AC%E5%9C%B0%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.4.</span> <span class="toc-text">4. time.ctime([secs]) - 转换时间戳为本地时间字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-time-gmtime-secs-%E8%8E%B7%E5%8F%96-UTC-%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84"><span class="toc-number">1.5.5.</span> <span class="toc-text">5. time.gmtime([secs]) - 获取 UTC 时间元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-time-localtime-secs-%E8%8E%B7%E5%8F%96%E6%9C%AC%E5%9C%B0%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84"><span class="toc-number">1.5.6.</span> <span class="toc-text">6. time.localtime([secs]) - 获取本地时间元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-time-mktime-tupletime-%E5%B0%86%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.5.7.</span> <span class="toc-text">7. time.mktime(tupletime) - 将时间元组转换为时间戳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-time-sleep-secs-%E7%A8%8B%E5%BA%8F%E4%BC%91%E7%9C%A0"><span class="toc-number">1.5.8.</span> <span class="toc-text">8. time.sleep(secs) - 程序休眠</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-time-strftime-fmt-tupletime-%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">1.5.9.</span> <span class="toc-text">9. time.strftime(fmt[, tupletime]) - 格式化时间元组为字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-time-strptime-str-fmt-a-b-d-H-M-S-Y-%E8%A7%A3%E6%9E%90%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%BA%E6%97%B6%E9%97%B4%E5%85%83%E7%BB%84"><span class="toc-number">1.5.10.</span> <span class="toc-text">10. time.strptime(str, fmt&#x3D;&#39;%a %b %d %H:%M:%S %Y&#39;) - 解析字符串为时间元组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-time-time-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-number">1.5.11.</span> <span class="toc-text">11. time.time() - 获取当前时间戳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-time-tzset-%E6%A0%B9%E6%8D%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F-TZ-%E9%87%8D%E6%96%B0%E5%88%9D%E5%A7%8B%E5%8C%96%E6%97%B6%E9%97%B4%E8%AE%BE%E7%BD%AE"><span class="toc-number">1.5.12.</span> <span class="toc-text">12. time.tzset() - 根据环境变量 TZ 重新初始化时间设置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#time-%E6%A8%A1%E5%9D%97%E7%9A%84%E6%97%B6%E5%8C%BA%E5%B1%9E%E6%80%A7"><span class="toc-number">1.6.</span> <span class="toc-text">time 模块的时区属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#time-timezone"><span class="toc-number">1.6.1.</span> <span class="toc-text">time.timezone</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#time-tzname"><span class="toc-number">1.6.2.</span> <span class="toc-text">time.tzname</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Python-calendar-%E6%A8%A1%E5%9D%97"><span class="toc-number">1.7.</span> <span class="toc-text">Python calendar 模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#calendar-%E6%A8%A1%E5%9D%97%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">1.7.1.</span> <span class="toc-text">calendar 模块内置函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E6%A8%A1%E5%9D%97%E5%92%8C%E5%87%BD%E6%95%B0"><span class="toc-number">1.8.</span> <span class="toc-text">其他相关模块和函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0"><span class="toc-number">1.9.</span> <span class="toc-text">练习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-1%EF%BC%9A%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E6%97%B6%E9%97%B4%E5%B9%B6%E6%89%93%E5%8D%B0"><span class="toc-number">1.9.1.</span> <span class="toc-text">练习 1：获取当前时间并打印</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-2%EF%BC%9A%E5%88%A4%E6%96%AD%E9%97%B0%E5%B9%B4"><span class="toc-number">1.9.2.</span> <span class="toc-text">练习 2：判断闰年</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-3%EF%BC%9A%E8%AE%A1%E7%AE%97%E4%B8%A4%E4%B8%AA%E6%97%A5%E6%9C%9F%E4%B9%8B%E9%97%B4%E7%9A%84%E5%A4%A9%E6%95%B0%E5%B7%AE-%E5%9F%BA%E7%A1%80%E7%89%88"><span class="toc-number">1.9.3.</span> <span class="toc-text">练习 3：计算两个日期之间的天数差 (基础版)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-4%EF%BC%9A%E6%89%93%E5%8D%B0%E6%8C%87%E5%AE%9A%E5%B9%B4%E4%BB%BD%E5%92%8C%E6%9C%88%E4%BB%BD%E7%9A%84%E6%97%A5%E5%8E%86"><span class="toc-number">1.9.4.</span> <span class="toc-text">练习 4：打印指定年份和月份的日历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-5%EF%BC%9A%E8%AE%A1%E7%AE%97%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E6%97%B6%E9%97%B4"><span class="toc-number">1.9.5.</span> <span class="toc-text">练习 5：计算程序执行时间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-6%EF%BC%9A%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8-%E7%94%9F%E6%97%A5%E5%80%92%E8%AE%A1%E6%97%B6-%E4%BD%BF%E7%94%A8-time-%E5%92%8C-calendar"><span class="toc-number">1.9.6.</span> <span class="toc-text">练习 6：综合应用 - 生日倒计时 (使用 time 和 calendar)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0-7%EF%BC%9A%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8-%E6%97%A5%E6%9C%9F%E8%A7%A3%E6%9E%90%E4%B8%8E%E8%BD%AC%E6%8D%A2-%E4%BD%BF%E7%94%A8-time-%E6%A8%A1%E5%9D%97"><span class="toc-number">1.9.7.</span> <span class="toc-text">练习 7：综合应用 - 日期解析与转换 (使用 time 模块)</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/30/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E6%97%A5%E6%9C%9F%E5%92%8C%E6%97%B6%E9%97%B4/" title="Python 日期和时间">Python 日期和时间</a><time datetime="2025-10-30T08:20:12.000Z" title="发表于 2025-10-30 16:20:12">2025-10-30</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/29/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E5%AD%97%E5%85%B8/" title="Python 字典">Python 字典</a><time datetime="2025-10-29T09:15:12.000Z" title="发表于 2025-10-29 17:15:12">2025-10-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/29/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E5%85%83%E7%BB%84/" title="Python 元组">Python 元组</a><time datetime="2025-10-29T05:15:12.000Z" title="发表于 2025-10-29 13:15:12">2025-10-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/29/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%E5%88%97%E8%A1%A8/" title="Python 列表（List）">Python 列表（List）</a><time datetime="2025-10-29T02:40:12.000Z" title="发表于 2025-10-29 10:40:12">2025-10-29</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/28/Python-%E5%9F%BA%E7%A1%80%E7%AF%87/Python%20%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="Python 字符串">Python 字符串</a><time datetime="2025-10-28T02:40:12.000Z" title="发表于 2025-10-28 10:40:12">2025-10-28</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 - 2025 By 码头</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i><button id="go-down" type="button" title="直达底部" onclick="btf.scrollToDest(document.body.scrollHeight, 500)"><i class="fas fa-arrow-down"></i></button></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>(() => {
+  const panguFn = () => {
+    if (typeof pangu === 'object') pangu.autoSpacingPage()
+    else {
+      btf.getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+        .then(() => {
+          pangu.autoSpacingPage()
+        })
+    }
+  }
+
+  const panguInit = () => {
+    if (false){
+      GLOBAL_CONFIG_SITE.isPost && panguFn()
+    } else {
+      panguFn()
+    }
+  }
+
+  btf.addGlobalFn('pjaxComplete', panguInit, 'pangu')
+  document.addEventListener('DOMContentLoaded', panguInit)
+})()</script><div class="js-pjax"><script>(() => {
+  let initFn = window.walineFn || null
+
+  const initWaline = (Fn) => {
+    const waline = Fn(Object.assign({
+      el: '#waline-wrap',
+      serverURL: 'https://www.toumatou.cn',
+      pageview: false,
+      dark: 'html[data-theme="dark"]',
+      path: window.location.pathname,
+      comment: false,
+    }, {"emoji":["//unpkg.com/@waline/emojis@1.2.0/bilibili","//unpkg.com/@waline/emojis@1.2.0/bmoji","//unpkg.com/@waline/emojis@1.2.0/qq","//unpkg.com/@waline/emojis@1.2.0/tieba"]}))
+
+    const destroyWaline = () => {
+      waline.destroy()
+    }
+
+    btf.addGlobalFn('pjaxSendOnce', destroyWaline, 'destroyWaline')
+  }
+
+  const loadWaline = () => {
+    if (initFn) initWaline(initFn)
+    else {
+      btf.getCSS('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.css')
+        .then(() => import('https://cdn.jsdelivr.net/npm/@waline/client/dist/waline.min.js'))
+        .then(({ init }) => {
+          initFn = init || Waline.init
+          initWaline(initFn)
+          window.walineFn = initFn
+        })
+    }
+  }
+
+  if ('Waline' === 'Waline' || !false) {
+    if (false) btf.loadComment(document.getElementById('waline-wrap'),loadWaline)
+    else setTimeout(loadWaline, 0)
+  } else {
+    window.loadOtherComment = loadWaline
+  }
+})()</script></div><script async src="/js/title.js"></script><canvas id="universe"></canvas><script defer src="/js/universe.js"></script><script src="/js/sun_moon.js" async></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>(() => {
+  const pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+  window.pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: pjaxSelectors,
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+  })
+
+  const triggerPjaxFn = (val) => {
+    if (!val) return
+    Object.values(val).forEach(fn => fn())
+  }
+
+  document.addEventListener('pjax:send', () => {
+    // removeEventListener
+    btf.removeGlobalFnEvent('pjaxSendOnce')
+    btf.removeGlobalFnEvent('themeChange')
+
+    // reset readmode
+    const $bodyClassList = document.body.classList
+    if ($bodyClassList.contains('read-mode')) $bodyClassList.remove('read-mode')
+
+    triggerPjaxFn(window.globalFn.pjaxSend)
+  })
+
+  document.addEventListener('pjax:complete', () => {
+    btf.removeGlobalFnEvent('pjaxCompleteOnce')
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+      const newScript = document.createElement('script')
+      const content = item.text || item.textContent || item.innerHTML || ""
+      Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+      newScript.appendChild(document.createTextNode(content))
+      item.parentNode.replaceChild(newScript, item)
+    })
+
+    triggerPjaxFn(window.globalFn.pjaxComplete)
+  })
+
+  document.addEventListener('pjax:error', e => {
+    if (e.request.status === 404) {
+      pjax.loadUrl('/404.html')
+    }
+  })
+})()</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --><script data-pjax>
+    function butterfly_categories_card_injector_config(){
+      var parent_div_git = document.getElementById('recent-posts');
+      var item_html = '<style>li.categoryBar-list-item{width:32.3%;}.categoryBar-list{max-height: 190px;overflow:auto;}.categoryBar-list::-webkit-scrollbar{width:0!important}@media screen and (max-width: 650px){.categoryBar-list{max-height: 160px;}}</style><div class="recent-post-item" style="height:auto;width:100%;padding:0px;"><div id="categoryBar"><ul class="categoryBar-list"><li class="categoryBar-list-item" style="background:url(/img/9e073b8874a2d9d5c15142e0cfe62c6e4070943.png);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/&quot;);" href="javascript:void(0);">黑科技</a><span class="categoryBar-list-count">8</span><span class="categoryBar-list-descr">每日搜罗</span></li><li class="categoryBar-list-item" style="background:url(/img/3175F7D0E3276DAD663A4622838F4915.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/&quot;);" href="javascript:void(0);">编程</a><span class="categoryBar-list-count">66</span><span class="categoryBar-list-descr">C/C++</span></li><li class="categoryBar-list-item" style="background:url(/img/620DF18B0490E1830074E446F5AF721B.jpg);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/软件/&quot;);" href="javascript:void(0);">软件</a><span class="categoryBar-list-count">7</span><span class="categoryBar-list-descr">好用的软件</span></li><li class="categoryBar-list-item" style="background:url(https://assets.akilar.top/image/cover4.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/C-教程/&quot;);" href="javascript:void(0);">C++教程</a><span class="categoryBar-list-count">30</span><span class="categoryBar-list-descr">个人日记</span></li><li class="categoryBar-list-item" style="background:url(https://assets.akilar.top/image/cover5.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/数据结构/&quot;);" href="javascript:void(0);">数据结构</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">诗词歌赋</span></li><li class="categoryBar-list-item" style="background:url(https://assets.akilar.top/image/cover6.webp);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/软件/工具类/&quot;);" href="javascript:void(0);">工具类</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr">杂谈教程</span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/C-教程/C-基础教程/&quot;);" href="javascript:void(0);">C++基础教程</a><span class="categoryBar-list-count">23</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/C-教程/C-面向对象/&quot;);" href="javascript:void(0);">C++面向对象</a><span class="categoryBar-list-count">7</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/数据结构/C语言/&quot;);" href="javascript:void(0);">C语言</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/C教程/&quot;);" href="javascript:void(0);">C教程</a><span class="categoryBar-list-count">19</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/软件/音乐软件/&quot;);" href="javascript:void(0);">音乐软件</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/个人创作/&quot;);" href="javascript:void(0);">个人创作</a><span class="categoryBar-list-count">2</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/软件/扫描软件/&quot;);" href="javascript:void(0);">扫描软件</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/图片/&quot;);" href="javascript:void(0);">图片</a><span class="categoryBar-list-count">3</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/网站/&quot;);" href="javascript:void(0);">网站</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/软件/游戏/&quot;);" href="javascript:void(0);">游戏</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/黑科技/软件/网盘下载/&quot;);" href="javascript:void(0);">网盘下载</a><span class="categoryBar-list-count">1</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/Python-教程/&quot;);" href="javascript:void(0);">Python 教程</a><span class="categoryBar-list-count">15</span><span class="categoryBar-list-descr"></span></li><li class="categoryBar-list-item" style="background:url(undefined);"> <a class="categoryBar-list-link" onclick="pjax.loadUrl(&quot;categories/编程/C教程/C基础教程/&quot;);" href="javascript:void(0);">C基础教程</a><span class="categoryBar-list-count">19</span><span class="categoryBar-list-descr"></span></li></ul></div></div>';
+      console.log('已挂载butterfly_categories_card')
+      parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+      }
+    if( document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    butterfly_categories_card_injector_config()
+    }
+  </script><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/11/15/个人新作/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/57CA502036AE3EBB5FAEE2CBAB9A3820.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-15</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/11/15/个人新作/&quot;);" href="javascript:void(0);" alt="">个人新作</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/11/15/个人新作/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/11/11/面向对象与面向过程/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/60c8f0e941eead3af099ef018783c0b2.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-11</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/11/11/面向对象与面向过程/&quot;);" href="javascript:void(0);" alt="">面向对象与面向过程</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/11/11/面向对象与面向过程/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/11/22/网盘限速？不存在的/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/6D77954DCDFECB124E8AF8B79EE6DE2E.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-22</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/11/22/网盘限速？不存在的/&quot;);" href="javascript:void(0);" alt="">网盘限速？不存在的</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/11/22/网盘限速？不存在的/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/12/07/雪中温情/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img_1/7AF6681739E006B43924C5B7B5A8462D.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-12-07</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/12/07/雪中温情/&quot;);" href="javascript:void(0);" alt="">雪中温情</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/12/07/雪中温情/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/11/20/冬/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img_1/8D1301F2D772236C008AC0D83C759365.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-20</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/11/20/冬/&quot;);" href="javascript:void(0);" alt="">寒意深处，春的絮语</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/11/20/冬/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2023/11/05/一款好用的音乐软件/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img_1/EF828DC4767E857A19FBAF543FFB902C.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-11-05</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2023/11/05/一款好用的音乐软件/&quot;);" href="javascript:void(0);" alt="">一款好用的音乐软件</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2023/11/05/一款好用的音乐软件/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/11/09/对不住了-Steam/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/3F931A6E28696AA8D432E28829F135BF.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-09</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/11/09/对不住了-Steam/&quot;);" href="javascript:void(0);" alt="">对不住了，Steam！Steam 游戏发烧友必备😏</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/11/09/对不住了-Steam/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2022/01/19/二叉树的遍历/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img/082D10E4ADC5CEF74F15C95433088D73.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-01-19</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2022/01/19/二叉树的遍历/&quot;);" href="javascript:void(0);" alt="">二叉树的遍历</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2022/01/19/二叉树的遍历/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" onclick="pjax.loadUrl(&quot;2024/11/03/精美的图片/&quot;);" href="javascript:void(0);" alt=""><img width="48" height="48" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-lazy-src="/img_1/4A6E8BD49BF0215100FC2B44F3FF69B7.jpg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2024-11-03</span><a class="blog-slider__title" onclick="pjax.loadUrl(&quot;2024/11/03/精美的图片/&quot;);" href="javascript:void(0);" alt="">星际之舞：宇宙的诗篇</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" onclick="pjax.loadUrl(&quot;2024/11/03/精美的图片/&quot;);" href="javascript:void(0);" alt="">详情       </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
