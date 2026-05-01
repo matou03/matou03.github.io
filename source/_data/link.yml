@@ -1,0 +1,52 @@
+- class_name: 码头的博客
+  class_desc: 
+  link_list:
+    - name: 码头
+      link: https://blog.toumatou.cn
+      avatar: /img/CFB91614C14711CE1BF5E11E3DD07D85.png
+      descr: 欢迎来到我的博客😆
+      siteshot: /img/2E7ACD823C75B4E15C31DEC35C63511F.jpg
+
+
+- class_name: 糖果屋のVIP
+  class_desc: 售后服务享五折优惠2333
+  link_list:
+    - name: Akilar
+      link: https://akilar.top
+      avatar: /img/siteicon/favicon.png
+      descr: 欢迎光临糖果屋
+      siteshot: https://cdn.jsdelivr.net/gh/Akilarlxh/ScreenShot@gh-pages/akilar.top.jpg
+      # siteshot就是站点缩略图的链接。  
+
+
+
+- class_name: 安知鱼
+  class_desc: 
+  link_list:
+    - name: 安知鱼
+      link: https://index.anheyu.com/
+      avatar: /img/siteicon/favicon.png
+      descr: 欢迎光临糖果屋
+      siteshot: https://cdn.jsdelivr.net/gh/Akilarlxh/ScreenShot@gh-pages/akilar.top.jpg
+      # siteshot就是站点缩略图的链接。  
+
+
+- class_name: 1.技术支持
+  class_desc: 本网站的搭建由以下开源作者提供技术支持
+  link_list: 
+    - name: Hexo 
+      link: https://hexo.io/zh-cn/
+      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+      descr: 快速、简单且强大的网志框架
+      siteshot: https://source.fomal.cc/siteshot/hexo.io.jpg
+      
+- class_name: 2.友情链接
+  class_desc: 一些好朋友~~
+  link_list:
+    - name: Fomalhaut🥝
+      link: https://fomal.cc/
+      avatar: /assets/head.jpg
+      descr: Future is now 🍭🍭🍭
+      siteshot: https://source.fomal.cc/siteshot/www.fomal.cn.jpg
+
+

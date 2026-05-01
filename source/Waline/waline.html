@@ -1,0 +1,26 @@
+<head>
+    <!-- ... -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@waline/client@v3/dist/waline.css"
+    />
+    <!-- ... -->
+  </head>
+  <body>
+    <!-- ... -->
+    <div id="waline"></div>
+    <script type="module">
+      import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+  
+      init({
+        el: '#waline',
+        serverURL: 'https://blog.toumatou.cn',
+
+
+        emoji: [
+      '//unpkg.com/@waline/emojis@1.2.0/bilibili',
+      '//unpkg.com/@waline/emojis@1.2.0/bmoji',
+    ],
+      });
+    </script>
+  </body>
